@@ -3,6 +3,9 @@ package gov.iti.career.hub.persistence.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "students")
 @NoArgsConstructor
@@ -47,4 +50,8 @@ public class Student extends User{
     @ManyToOne
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
+
+    @OneToMany(mappedBy = "student")
+    private Set<Attendance> attendances = new HashSet<>();
+
 }

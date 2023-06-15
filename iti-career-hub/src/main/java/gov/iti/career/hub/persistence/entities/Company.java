@@ -43,6 +43,7 @@ public class Company extends User {
             , nullable = false
     )
     private String[] technologies;
+
     @Column(name = "country", nullable = false)
     private String country;
 
@@ -55,4 +56,6 @@ public class Company extends User {
     @Column(name = "street", nullable = false)
     private String street;
 
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted;
 }

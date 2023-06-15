@@ -31,4 +31,5 @@ public class Staff extends User {
         this.lastName = lastName;
         this.department = department;
     }
+
 }

@@ -1,5 +1,6 @@
 package gov.iti.career.hub.persistence.entities;
 
+import gov.iti.career.hub.persistence.entities.enums.Discipline;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,7 +19,12 @@ public class Department {
     @Column(name = "department_name", nullable = false)
     private String departmentName;
 
+    @Column(name = "discipline", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Discipline discipline;
+
     @OneToOne
     @JoinColumn(name = "manager_id")
     private Staff manager;
+
 }
