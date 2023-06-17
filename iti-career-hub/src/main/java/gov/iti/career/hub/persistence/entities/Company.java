@@ -56,6 +56,6 @@ public class Company extends User {
     @Column(name = "street", nullable = false)
     private String street;
 
-    @Column(name = "is_deleted", nullable = false)
-    private Boolean isDeleted;
+    @Column(name = "is_deleted", columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private Boolean isDeleted = false;
 }
