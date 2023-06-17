@@ -21,8 +21,12 @@ public class JpaApplicationRunner implements ApplicationRunner {
     @Transactional
     public void run(ApplicationArguments args) throws Exception {
         Role admin = Role.builder()
-                        .roleName("ADMIN")
-                        .build();
+                .roleName("ADMIN")
+                .build();
+
+        Role organizer = Role.builder()
+                .roleName("ORGANIZER")
+                .build();
 
         Department jets = Department.builder()
                 .departmentName("JETS")
@@ -32,6 +36,30 @@ public class JpaApplicationRunner implements ApplicationRunner {
         Department mobile = Department.builder()
                 .departmentName("MOBILE")
                 .discipline(Discipline.SOFTWARE_ENGINEERING_AND_DEVELOPMENT)
+                .build();
+
+        Company company = Company.builder()
+                .companyName("khaled's company")
+                .username("khaleds")
+                .password("password")
+                .email("company@gmail.com")
+                .role(admin)
+                .city("Giza")
+                .country("Egypt")
+                .state("Sheikh Zayed")
+                .street("Street 100")
+                .description("Company Description")
+                .technologies(new String[]{"JPA", "Springboot Framework"})
+                .build();
+
+        Staff staff = Staff.builder()
+                .username("zyad yasser")
+                .email("zyad.yasser@gmaiill.com")
+                .password("password")
+                .role(admin)
+                .firstName("zyad")
+                .lastName("yasser")
+                .department(jets)
                 .build();
 
         Student student = Student.builder()
@@ -51,6 +79,10 @@ public class JpaApplicationRunner implements ApplicationRunner {
         departmentRepository.save(jets);
         departmentRepository.save(mobile);
         roleRepository.save(admin);
+        roleRepository.save(organizer);
         userRepository.save(student);
+        userRepository.save(staff);
+        userRepository.save(company);
+
     }
 }

@@ -1,7 +1,7 @@
 package gov.iti.career.hub.controllers.staff;
 
 import gov.iti.career.hub.controllers.staff.dtos.requests.UpdateStaffRequest;
-import gov.iti.career.hub.controllers.staff.dtos.responses.GetAllStaffResponse;
+import gov.iti.career.hub.controllers.staff.dtos.responses.GetStaffResponse;
 import gov.iti.career.hub.controllers.staff.dtos.responses.UpdateStaffResponse;
 import gov.iti.career.hub.services.StaffService;
 import jakarta.validation.Valid;
@@ -18,13 +18,19 @@ public class StaffController {
 
     private final StaffService staffService;
     @GetMapping
-    public ResponseEntity<Collection<GetAllStaffResponse>> findAllStudents(){
+    public ResponseEntity<Collection<GetStaffResponse>> findAllStaff(){
         return ResponseEntity
                 .ok(staffService.findAllStaff());
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<GetStaffResponse> findAllStaff(@PathVariable Integer id){
+        return ResponseEntity
+                .ok(staffService.findStaffById(id));
+    }
+
     @PutMapping("{id}")
-    public ResponseEntity<UpdateStaffResponse> updateStudent(@PathVariable Integer id, @Valid @RequestBody UpdateStaffRequest request){
+    public ResponseEntity<UpdateStaffResponse> updateStaff(@PathVariable Integer id, @Valid @RequestBody UpdateStaffRequest request){
         return ResponseEntity.ok(staffService.updateStaff(id, request));
     }
 }

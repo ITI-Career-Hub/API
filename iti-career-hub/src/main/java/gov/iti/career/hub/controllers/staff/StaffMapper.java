@@ -1,7 +1,7 @@
 package gov.iti.career.hub.controllers.staff;
 
 import gov.iti.career.hub.controllers.staff.dtos.requests.UpdateStaffRequest;
-import gov.iti.career.hub.controllers.staff.dtos.responses.GetAllStaffResponse;
+import gov.iti.career.hub.controllers.staff.dtos.responses.GetStaffResponse;
 import gov.iti.career.hub.controllers.staff.dtos.responses.UpdateStaffResponse;
 import gov.iti.career.hub.persistence.entities.Department;
 import gov.iti.career.hub.persistence.entities.Role;
@@ -29,7 +29,7 @@ public abstract class StaffMapper {
     @Mapping(source = "departmentId", target = "department.id")
     @Mapping(source = "roleName", target = "role.roleName")
     @Mapping(source = "roleId", target = "role.id")
-    protected abstract Staff getAllStaffResponseMappings(GetAllStaffResponse getAllStaffResponse);
+    protected abstract Staff getStaffResponseMappings(GetStaffResponse getStaffResponse);
 
     @Mapping(source = "departmentId", target = "department", qualifiedByName = "fetchDepartmentById")
     @Mapping(source = "roleId", target = "role", qualifiedByName = "fetchRoleById")
@@ -42,21 +42,17 @@ public abstract class StaffMapper {
     protected abstract Staff updateStaffResponseMappings(UpdateStaffResponse updateStaffResponse);
 
     // TO ENTITIES
-    @InheritConfiguration(name = "getAllStaffResponseMappings")
-    public abstract Staff toEntity(GetAllStaffResponse getAllStudentsResponse);
 
     @InheritConfiguration(name = "updateStaffRequestMappings")
     public abstract Staff toEntity(UpdateStaffRequest updateStaffRequest);
 
-    @InheritConfiguration(name = "updateStaffResponseMappings")
-    public abstract Staff toEntity(UpdateStaffResponse updateStaffResponse);
 
     // TO DTO
-    @InheritInverseConfiguration(name = "toEntity")
-    public abstract GetAllStaffResponse toGetAllStaffResponseDto(Staff staff);
+    @InheritInverseConfiguration(name = "getStaffResponseMappings")
+    public abstract GetStaffResponse toGetStaffResponseDto(Staff staff);
 
-    @InheritInverseConfiguration(name = "toEntity")
-    public abstract Collection<GetAllStaffResponse> collectionToDto(Collection<Staff> staff);
+    @InheritInverseConfiguration(name = "getStaffResponseMappings")
+    public abstract Collection<GetStaffResponse> collectionToDto(Collection<Staff> staff);
     @InheritInverseConfiguration(name = "updateStaffResponseMappings")
     public abstract UpdateStaffResponse toUpdateStaffResponseDto(Staff staff);
 
