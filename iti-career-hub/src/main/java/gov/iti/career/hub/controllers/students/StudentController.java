@@ -1,11 +1,15 @@
 package gov.iti.career.hub.controllers.students;
 
+import gov.iti.career.hub.controllers.students.dtos.requests.ActivateStudentRequest;
 import gov.iti.career.hub.controllers.students.dtos.requests.UpdateStudentRequest;
+import gov.iti.career.hub.controllers.students.dtos.responses.ActivateStudentResponse;
 import gov.iti.career.hub.controllers.students.dtos.responses.GetStudentResponse;
 import gov.iti.career.hub.controllers.students.dtos.responses.UpdateStudentResponse;
 import gov.iti.career.hub.services.StudentService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.jose4j.jwt.MalformedClaimException;
+import org.jose4j.jwt.consumer.InvalidJwtException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,8 +33,15 @@ public class StudentController {
         return ResponseEntity.ok(studentService.findStudentById(id));
     }
     @PutMapping("{id}")
-    public ResponseEntity<UpdateStudentResponse> updateStudent(@PathVariable Integer id, @Valid @RequestBody UpdateStudentRequest request){
+    public ResponseEntity<UpdateStudentResponse> updateStudent(@PathVariable Integer id,
+                                                               @Valid @RequestBody UpdateStudentRequest request){
         return ResponseEntity.ok(studentService.updateStudent(id, request));
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<ActivateStudentResponse> registerStudent(@RequestParam("token") String token,
+                                                                   @RequestBody ActivateStudentRequest request) throws InvalidJwtException, MalformedClaimException {
+        return ResponseEntity.ok(studentService.activateStudent(token, request));
     }
 
 }
