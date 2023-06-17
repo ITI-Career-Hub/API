@@ -30,7 +30,7 @@ public class StaffService {
     public UpdateStaffResponse updateStaff(Integer id, UpdateStaffRequest request) {
         Staff staff = staffRepository.findById(id)
             .orElseThrow( () ->
-                    new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found")
+                    new ResponseStatusException(HttpStatus.NOT_FOUND, "Staff Not Found")
             );
         staffMapper.partialUpdate(request, staff);
         return staffMapper.toUpdateStaffResponseDto(staffRepository.save(staff));
@@ -39,7 +39,7 @@ public class StaffService {
     public GetStaffResponse findStaffById(Integer id) {
         Staff staff = staffRepository.findById(id)
                 .orElseThrow( () ->
-                        new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found")
+                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Staff Not Found")
                 );
         return staffMapper.toGetStaffResponseDto(staff);
     }

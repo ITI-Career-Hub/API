@@ -23,7 +23,7 @@ public class StudentService {
     public GetStudentResponse findStudentById(Integer id){
         Student student = studentRepository.findById(id)
             .orElseThrow( () ->
-                    new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found")
+                    new ResponseStatusException(HttpStatus.NOT_FOUND, "Student Not Found")
             );
         return studentMapper.toGetStudentResponseDto(student);
     }
@@ -34,7 +34,7 @@ public class StudentService {
     public UpdateStudentResponse updateStudent(Integer id, UpdateStudentRequest request) {
         Student student = studentRepository.findById(id)
                             .orElseThrow( () ->
-                                new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found")
+                                new ResponseStatusException(HttpStatus.NOT_FOUND, "Student Not Found")
                             );
         studentMapper.partialUpdate(request, student);
         return studentMapper.toUpdateStudentResponseDto(studentRepository.save(student));

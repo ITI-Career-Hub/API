@@ -2,7 +2,7 @@ package gov.iti.career.hub.controllers.companies;
 
 import gov.iti.career.hub.controllers.companies.dtos.requests.UpdateCompanyRequest;
 import gov.iti.career.hub.controllers.companies.dtos.requests.UpdateCompanyResponse;
-import gov.iti.career.hub.controllers.companies.dtos.responses.GetAllCompaniesResponse;
+import gov.iti.career.hub.controllers.companies.dtos.responses.GetCompanyResponse;
 import gov.iti.career.hub.persistence.entities.Company;
 import org.mapstruct.*;
 
@@ -13,16 +13,12 @@ public abstract class CompanyMapper {
 
     @Mapping(source = "roleName", target = "role.roleName")
     @Mapping(source = "roleId", target = "role.id")
-    protected abstract Company getAllCompaniesResponseMappings(GetAllCompaniesResponse getAllCompaniesResponse);
+    protected abstract Company getCompanyResponseMappings(GetCompanyResponse getCompanyResponse);
 
-    @InheritConfiguration(name = "getAllCompaniesResponseMappings")
-    public abstract Company toEntity(GetAllCompaniesResponse getAllCompaniesResponse);
+    public abstract Collection<GetCompanyResponse> collectionToDto(Collection<Company> companies);
 
-    public abstract Collection<GetAllCompaniesResponse> collectionToDto(Collection<Company> companies);
-
-    @InheritInverseConfiguration(name = "getAllCompaniesResponseMappings")
-    public abstract GetAllCompaniesResponse toGetAllCompaniesResponseDto(Company company);
-
+    @InheritInverseConfiguration(name = "getCompanyResponseMappings")
+    public abstract GetCompanyResponse toGetCompanyResponseDto(Company company);
 
     public abstract Company toEntity(UpdateCompanyRequest updateCompanyRequest);
 
