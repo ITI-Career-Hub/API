@@ -27,7 +27,6 @@ public class Student extends User{
         this.intakeNumber = intakeNumber;
         this.graduationYear = graduationYear;
         this.department = department;
-        super.setRole(new Role(1, "STUDENT"));
     }
 
     @Column(name = "first_name")

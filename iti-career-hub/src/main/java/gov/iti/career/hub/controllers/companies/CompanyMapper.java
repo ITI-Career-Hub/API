@@ -1,5 +1,7 @@
 package gov.iti.career.hub.controllers.companies;
 
+import gov.iti.career.hub.controllers.companies.dtos.requests.ActivateCompanyRequest;
+import gov.iti.career.hub.controllers.companies.dtos.responses.ActivateCompanyResponse;
 import gov.iti.career.hub.controllers.companies.dtos.requests.UpdateCompanyRequest;
 import gov.iti.career.hub.controllers.companies.dtos.requests.UpdateCompanyResponse;
 import gov.iti.career.hub.controllers.companies.dtos.responses.GetCompanyResponse;
@@ -26,4 +28,13 @@ public abstract class CompanyMapper {
     public abstract Company partialUpdate(UpdateCompanyRequest updateCompanyRequest, @MappingTarget Company company);
 
     public abstract UpdateCompanyResponse toUpdateCompanyResponseDto(Company company);
+
+    abstract Company toEntity(ActivateCompanyRequest activateCompanyRequest);
+
+    abstract ActivateCompanyRequest toActivateCompanyRequestDto(Company company);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    public abstract Company partialUpdate(ActivateCompanyRequest activateCompanyRequest, @MappingTarget Company company);
+
+    public abstract ActivateCompanyResponse toActivateCompanyResponseDto(Company company);
 }

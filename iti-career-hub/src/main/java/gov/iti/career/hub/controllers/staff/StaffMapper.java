@@ -1,6 +1,8 @@
 package gov.iti.career.hub.controllers.staff;
 
+import gov.iti.career.hub.controllers.staff.dtos.requests.ActivateStaffRequest;
 import gov.iti.career.hub.controllers.staff.dtos.requests.UpdateStaffRequest;
+import gov.iti.career.hub.controllers.staff.dtos.responses.ActivateStaffResponse;
 import gov.iti.career.hub.controllers.staff.dtos.responses.GetStaffResponse;
 import gov.iti.career.hub.controllers.staff.dtos.responses.UpdateStaffResponse;
 import gov.iti.career.hub.persistence.entities.Department;
@@ -53,6 +55,7 @@ public abstract class StaffMapper {
 
     @InheritInverseConfiguration(name = "getStaffResponseMappings")
     public abstract Collection<GetStaffResponse> collectionToDto(Collection<Staff> staff);
+
     @InheritInverseConfiguration(name = "updateStaffResponseMappings")
     public abstract UpdateStaffResponse toUpdateStaffResponseDto(Staff staff);
 
@@ -62,16 +65,36 @@ public abstract class StaffMapper {
     public abstract Staff partialUpdate(UpdateStaffRequest updateStaffRequest, @MappingTarget Staff staff);
 
     @Named("fetchRoleById")
-    protected Role fetchRoleById(Integer id){
+    protected Role fetchRoleById(Integer id) {
         return roleRepository.findById(id)
-            .orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Role Not Found"));
+                .orElseThrow(() ->
+                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Role Not Found"));
     }
 
     @Named("fetchDepartmentById")
-    protected Department fetchDepartmentById(Integer id){
+    protected Department fetchDepartmentById(Integer id) {
         return departmentRepository.findById(id)
                 .orElseThrow(() ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Department Not Found"));
     }
+
+    abstract Staff toEntity(ActivateStaffRequest activateStaffRequest);
+
+    abstract ActivateStaffRequest toActivateStaffRequestDto(Staff staff);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    public abstract Staff partialUpdate(ActivateStaffRequest activateStaffRequest, @MappingTarget Staff staff);
+
+    @Mapping(source = "departmentDepartmentName", target = "department.departmentName")
+    @Mapping(source = "departmentId", target = "department.id")
+    @Mapping(source = "roleRoleName", target = "role.roleName")
+    @Mapping(source = "roleId", target = "role.id")
+    abstract Staff toEntity(ActivateStaffResponse activateStaffResponse);
+
+    @InheritInverseConfiguration(name = "updateStaffResponseMappings")
+    public abstract ActivateStaffResponse toActivateStaffResponseDto(Staff staff);
+
+    @InheritConfiguration(name = "updateStaffResponseMappings")
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    public abstract Staff partialUpdate(ActivateStaffResponse activateStaffResponse, @MappingTarget Staff staff);
 }
