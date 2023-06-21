@@ -25,6 +25,7 @@ public record UpdateStudentRequest(
         @Min(value = 1, message = "Intake number must exceed 1")
         Short intakeNumber,
         @Min(value = 1980, message = "Graduation year must exceed 1980")
-        Short graduationYear)
+        Short graduationYear,
+        Integer departmentId)
         implements Serializable , Request {
 }

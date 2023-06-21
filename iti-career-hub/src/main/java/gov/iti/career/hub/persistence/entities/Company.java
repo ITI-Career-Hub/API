@@ -20,7 +20,7 @@ public class Company extends User {
     public Company(Integer id, String username, String password, String email,
                    Role role, String companyName, String description, String[] technologies,
                    String country, String state, String city, String street) {
-        super(id, username, password, email, role);
+        super(id, username, password, email, role, false);
         this.companyName = companyName;
         this.description = description;
         this.technologies = technologies;
@@ -56,6 +56,6 @@ public class Company extends User {
     @Column(name = "street", nullable = false)
     private String street;
 
-    @Column(name = "is_deleted", nullable = false)
-    private Boolean isDeleted;
+    @Column(name = "is_deleted", columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private Boolean isDeleted = false;
 }

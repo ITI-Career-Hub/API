@@ -6,4 +6,5 @@ import org.springframework.data.repository.ListPagingAndSortingRepository;
 
 public interface RoleRepository extends JpaRepository<Role, Integer>
                                             , ListPagingAndSortingRepository<Role, Integer> {
+    Role findByRoleName(String roleName);
 }

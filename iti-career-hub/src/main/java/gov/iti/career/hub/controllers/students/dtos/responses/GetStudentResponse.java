@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * A DTO for the {@link gov.iti.career.hub.persistence.entities.Student} entity
  */
-public record GetAllStudentsResponse(
+public record GetStudentResponse(
             Integer id, String username, String password, String email,
             Integer roleId, String roleName, String firstName, String lastName,
             String college, String phoneNumber, Short intakeNumber, Short graduationYear,
