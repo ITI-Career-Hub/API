@@ -43,6 +43,12 @@ public abstract class StaffMapper {
     @Mapping(source = "roleId", target = "role.id")
     protected abstract Staff updateStaffResponseMappings(UpdateStaffResponse updateStaffResponse);
 
+    @Mapping(source = "departmentDepartmentName", target = "department.departmentName")
+    @Mapping(source = "departmentId", target = "department.id")
+    @Mapping(source = "roleRoleName", target = "role.roleName")
+    @Mapping(source = "roleId", target = "role.id")
+    protected abstract Staff activateStaffResponseMappings(ActivateStaffResponse activateStaffResponse);
+
     // TO ENTITIES
 
     @InheritConfiguration(name = "updateStaffRequestMappings")
@@ -91,10 +97,10 @@ public abstract class StaffMapper {
     @Mapping(source = "roleId", target = "role.id")
     abstract Staff toEntity(ActivateStaffResponse activateStaffResponse);
 
-    @InheritInverseConfiguration(name = "updateStaffResponseMappings")
+    @InheritInverseConfiguration(name = "activateStaffResponseMappings")
     public abstract ActivateStaffResponse toActivateStaffResponseDto(Staff staff);
 
-    @InheritConfiguration(name = "updateStaffResponseMappings")
+    @InheritConfiguration(name = "activateStaffResponseMappings")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     public abstract Staff partialUpdate(ActivateStaffResponse activateStaffResponse, @MappingTarget Staff staff);
 }
