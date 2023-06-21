@@ -59,7 +59,6 @@ public class CompanyService {
                 .orElseThrow( () ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Company Not Found")
                 );
-        company.setRole(roleRepository.findByRoleName("COMPANY"));
         if(!company.getIsActive()){
             companyMapper.partialUpdate(request, company);
             company.setIsActive(true);

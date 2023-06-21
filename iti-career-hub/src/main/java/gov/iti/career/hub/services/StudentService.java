@@ -6,6 +6,7 @@ import gov.iti.career.hub.controllers.students.dtos.requests.UpdateStudentReques
 import gov.iti.career.hub.controllers.students.dtos.responses.ActivateStudentResponse;
 import gov.iti.career.hub.controllers.students.dtos.responses.GetStudentResponse;
 import gov.iti.career.hub.controllers.students.dtos.responses.UpdateStudentResponse;
+import gov.iti.career.hub.persistence.entities.Role;
 import gov.iti.career.hub.persistence.entities.Student;
 import gov.iti.career.hub.persistence.repositories.RoleRepository;
 import gov.iti.career.hub.persistence.repositories.StudentRepository;
@@ -26,7 +27,7 @@ public class StudentService {
 
     private final StudentMapper studentMapper;
     private final StudentRepository studentRepository;
-    private final RoleRepository roleRepository;
+//    private final RoleRepository roleRepository;
     private final JwtConsumer jwtConsumer;
 
     public GetStudentResponse findStudentById(Integer id){
@@ -58,7 +59,6 @@ public class StudentService {
             .orElseThrow( () ->
                     new ResponseStatusException(HttpStatus.NOT_FOUND, "Student Not Found")
             );
-        student.setRole(roleRepository.findByRoleName("STUDENT"));
         if(!student.getIsActive()){
             studentMapper.partialUpdate(request, student);
             student.setIsActive(true);

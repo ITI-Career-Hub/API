@@ -6,9 +6,11 @@ import gov.iti.career.hub.controllers.register.RegistrationMapper;
 import gov.iti.career.hub.controllers.register.ResourceCreatedMessage;
 import gov.iti.career.hub.controllers.register.dtos.requests.RegisterStudentRequest;
 import gov.iti.career.hub.persistence.entities.Company;
+import gov.iti.career.hub.persistence.entities.Role;
 import gov.iti.career.hub.persistence.entities.Staff;
 import gov.iti.career.hub.persistence.entities.Student;
 import gov.iti.career.hub.persistence.repositories.CompanyRepository;
+import gov.iti.career.hub.persistence.repositories.RoleRepository;
 import gov.iti.career.hub.persistence.repositories.StaffRepository;
 import gov.iti.career.hub.persistence.repositories.UserRepository;
 import lombok.AllArgsConstructor;
@@ -25,12 +27,14 @@ public class RegistrationService {
     private final UserRepository userRepository;
     private final CompanyRepository companyRepository;
     private final StaffRepository staffRepository;
+    private final RoleRepository roleRepository;
     private final RegistrationMapper mapper;
     private final ObjectFactory<JsonWebSignature> signedRegistrationToken;
     private final ObjectFactory<JwtClaims> registrationClaims;
     private final EmailService emailService;
     public ResourceCreatedMessage registerStudent(RegisterStudentRequest request) throws JoseException {
         Student student = mapper.toStudentEntity(request);
+        student.setRole(roleRepository.findByRoleName("STUDENT"));
         userRepository.save(student);
         JsonWebSignature token = signedRegistrationToken.getObject();
         JwtClaims claims = registrationClaims.getObject();
@@ -47,6 +51,7 @@ public class RegistrationService {
 
     public ResourceCreatedMessage registerCompany(RegisterCompanyRequest request) throws JoseException {
         Company company = mapper.toCompanyEntity(request);
+        company.setRole(roleRepository.findByRoleName("COMPANY"));
         companyRepository.save(company);
         JsonWebSignature token = signedRegistrationToken.getObject();
         JwtClaims claims = registrationClaims.getObject();
@@ -63,6 +68,7 @@ public class RegistrationService {
 
     public ResourceCreatedMessage registerStaff(RegisterStaffRequest request) throws JoseException {
         Staff staff = mapper.toStaffEntity(request);
+        staff.setRole(roleRepository.findByRoleName("STAFF"));
         staffRepository.save(staff);
         JsonWebSignature token = signedRegistrationToken.getObject();
         JwtClaims claims = registrationClaims.getObject();

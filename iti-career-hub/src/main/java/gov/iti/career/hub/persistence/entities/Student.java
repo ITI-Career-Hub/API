@@ -9,6 +9,7 @@ import java.util.Set;
 @Entity
 @Table(name = "students")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -27,6 +28,7 @@ public class Student extends User{
         this.intakeNumber = intakeNumber;
         this.graduationYear = graduationYear;
         this.department = department;
+//        super.setRole(new Role(4, "STUDENT"));
     }
 
     @Column(name = "first_name")
