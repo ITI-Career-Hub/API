@@ -62,6 +62,6 @@ public class Appointment {
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
-    @OneToMany(mappedBy = "appointment")
+    @OneToMany(mappedBy = "appointment", cascade = CascadeType.PERSIST)
     private Set<Attendance> attendances = new HashSet<>();
 }

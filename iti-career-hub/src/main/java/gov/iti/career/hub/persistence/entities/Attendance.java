@@ -15,6 +15,7 @@ import org.hibernate.query.sql.internal.ParameterRecognizerImpl;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 @ToString
 public class Attendance {
 

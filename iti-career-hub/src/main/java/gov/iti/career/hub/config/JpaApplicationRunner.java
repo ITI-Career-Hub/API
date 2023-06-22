@@ -10,6 +10,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 @Component
 @AllArgsConstructor
 public class JpaApplicationRunner implements ApplicationRunner {
@@ -17,6 +19,7 @@ public class JpaApplicationRunner implements ApplicationRunner {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final DepartmentRepository departmentRepository;
+    private final EventRepository eventRepository;
 
     @Override
     @Transactional
@@ -85,6 +88,16 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .lastName("hisham")
                 .build();
 
+        Event event = Event.builder()
+                .eventName("Fair43")
+                .startDate(LocalDate.now().minusDays(3))
+                .endDate(LocalDate.now())
+                .city("Cairo")
+                .state("Cairo")
+                .country("Egypt")
+                .street("Haram")
+                .build();
+
         departmentRepository.save(jets);
         departmentRepository.save(mobile);
         roleRepository.save(adminRole);
@@ -94,6 +107,6 @@ public class JpaApplicationRunner implements ApplicationRunner {
         userRepository.save(student);
         userRepository.save(staff);
         userRepository.save(company);
-
+        eventRepository.save(event);
     }
 }

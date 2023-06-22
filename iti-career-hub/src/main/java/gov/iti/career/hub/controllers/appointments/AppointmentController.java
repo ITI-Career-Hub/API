@@ -2,6 +2,7 @@ package gov.iti.career.hub.controllers.appointments;
 
 import java.util.Collection;
 
+import gov.iti.career.hub.controllers.appointments.dtos.responses.GetAttendanceResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,11 +42,11 @@ public class AppointmentController {
                 .ok(appointmentService.findAppointment(id));
     }
 
-    @PostMapping
-    public ResponseEntity<AddAppointmentResponse> addAppointment(@Valid @RequestBody AddAppointmentRequest request){
-        return ResponseEntity
-                .ok(appointmentService.addAppointment(request));
-    }
+//    @PostMapping
+//    public ResponseEntity<AddAppointmentResponse> addAppointment(@Valid @RequestBody AddAppointmentRequest request){
+//        return ResponseEntity
+//                .ok(appointmentService.addAppointment(request));
+//    }
 
     @DeleteMapping("{id}")
     public ResponseEntity deleteAppointment(@PathVariable Integer id){
@@ -56,6 +57,16 @@ public class AppointmentController {
     @PutMapping("{id}")
     public ResponseEntity<UpdateAppointmentResponse> updateAppointment(@PathVariable Integer id, @Valid @RequestBody UpdateAppointmentRequest request){
         return ResponseEntity.ok(appointmentService.updateAppointment(id, request));
-    } 
-    
+    }
+
+    @GetMapping("{id}/attendance")
+    public ResponseEntity<Collection<GetAttendanceResponse>> getAppointmentAttendances(@PathVariable Integer id){
+        return ResponseEntity.ok(appointmentService.getAppointmentAttendances(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<AddAppointmentResponse> addAppointment(@Valid @RequestBody AddAppointmentRequest request){
+        return ResponseEntity
+                .ok(appointmentService.addAppointment(request));
+    }
 }

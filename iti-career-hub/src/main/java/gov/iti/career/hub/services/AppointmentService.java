@@ -1,7 +1,11 @@
 package gov.iti.career.hub.services;
 
-import java.util.Collection;
+import java.util.*;
 
+import gov.iti.career.hub.controllers.appointments.dtos.responses.GetAttendanceResponse;
+import gov.iti.career.hub.persistence.entities.Attendance;
+import gov.iti.career.hub.persistence.entities.enums.AttendanceStatus;
+import gov.iti.career.hub.persistence.repositories.StudentRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -22,6 +26,7 @@ public class AppointmentService {
 
     private final AppointmentMapper appointmentMapper;
     private final AppointmentRepository appointmentRepository;
+    private final StudentRepository studentRepository;
 
 
     public Collection<GetAppointmentResponse> findAllAppointments(){
@@ -38,10 +43,22 @@ public class AppointmentService {
     }
 
     public AddAppointmentResponse addAppointment(AddAppointmentRequest request){
+        Appointment appointment = appointmentMapper.toEntity(request);
+        Set<Attendance> attendances = new HashSet<>();
+        for(Integer id:request.studentIds()) {
+            attendances.add(
+                    Attendance.builder()
+                            .student(studentRepository.findById(id)
+                                    .orElseThrow(() ->
+                                    new ResponseStatusException(HttpStatus.NOT_FOUND, "Appointment Not Found")))
+                            .appointment(appointment)
+                            .attendanceStatus(AttendanceStatus.PENDING)
+                            .build()
+            );
+        }
+        appointment.setAttendances(attendances);
         return appointmentMapper.toAddAppointmentResponseDto(
-                appointmentRepository.save(
-                appointmentMapper.toEntity(request)
-        ));
+                appointmentRepository.save(appointment));
     }
 
     public void deleteAppointment(Integer id){
@@ -58,5 +75,10 @@ public class AppointmentService {
     }
 
 
-    
+    public Collection<GetAttendanceResponse> getAppointmentAttendances(Integer id){
+        return appointmentMapper.toDto(
+                appointmentRepository.findById(id).orElseThrow(() ->
+                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Appointment Not Found")).getAttendances()
+        );
+    }
 }
