@@ -1,5 +1,6 @@
 package gov.iti.career.hub.controllers.students;
 
+import gov.iti.career.hub.controllers.register.dtos.requests.RegisterStudentRequest;
 import gov.iti.career.hub.controllers.students.dtos.requests.ActivateStudentRequest;
 import gov.iti.career.hub.controllers.students.dtos.requests.UpdateStudentRequest;
 import gov.iti.career.hub.controllers.students.dtos.responses.ActivateStudentResponse;
@@ -44,4 +45,8 @@ public class StudentController {
         return ResponseEntity.ok(studentService.activateStudent(token, request));
     }
 
+    @PostMapping("/validate")
+    public ResponseEntity<RegisterStudentRequest> registerStudentData(@RequestParam("token") String token) throws InvalidJwtException, MalformedClaimException {
+        return ResponseEntity.ok(studentService.registerStudentData(token));
+    }
 }

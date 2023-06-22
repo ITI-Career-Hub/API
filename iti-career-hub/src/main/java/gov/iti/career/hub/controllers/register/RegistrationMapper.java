@@ -20,4 +20,7 @@ public interface RegistrationMapper {
 
     @Mapping(source = "departmentId", target = "department.id")
     Staff toStaffEntity(RegisterStaffRequest registerStaffRequest);
+
+    @Mapping(source = "department.id", target = "departmentId")
+    public RegisterStudentRequest toRegisterStudentRequest(Student student);
 }

@@ -1,5 +1,7 @@
 package gov.iti.career.hub.services;
 
+import gov.iti.career.hub.controllers.register.RegistrationMapper;
+import gov.iti.career.hub.controllers.register.dtos.requests.RegisterStudentRequest;
 import gov.iti.career.hub.controllers.students.StudentMapper;
 import gov.iti.career.hub.controllers.students.dtos.requests.ActivateStudentRequest;
 import gov.iti.career.hub.controllers.students.dtos.requests.UpdateStudentRequest;
@@ -27,6 +29,7 @@ public class StudentService {
 
     private final StudentMapper studentMapper;
     private final StudentRepository studentRepository;
+    private final RegistrationMapper mapper;
 //    private final RoleRepository roleRepository;
     private final JwtConsumer jwtConsumer;
 
@@ -66,5 +69,14 @@ public class StudentService {
         }
         else throw new RuntimeException("Token Already Consumed Exception");
 
+    }
+
+    public RegisterStudentRequest registerStudentData(String token) throws InvalidJwtException, MalformedClaimException {
+        JwtClaims claims = jwtConsumer.processToClaims(token);
+        Integer studentId = Integer.parseInt(claims.getSubject());
+        Student student = studentRepository.findById(studentId).orElseThrow( () ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Student Not Found")
+        );
+        return mapper.toRegisterStudentRequest(student);
     }
 }
