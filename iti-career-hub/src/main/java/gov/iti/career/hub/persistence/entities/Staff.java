@@ -23,13 +23,11 @@ public class Staff extends User {
     private Department department;
 
     @Builder
-    public Staff(Integer id, String username, String password,
-                 String email, Role role, String firstName,
-                 String lastName, Department department) {
-        super(id, username, password, email, role, false);
+    public Staff(Integer id, String username, String password, String email, String pictureUrl, Role role,
+                 Boolean isActive, String firstName, String lastName, Department department) {
+        super(id, username, password, email, pictureUrl, role, isActive);
         this.firstName = firstName;
         this.lastName = lastName;
         this.department = department;
     }
-
 }

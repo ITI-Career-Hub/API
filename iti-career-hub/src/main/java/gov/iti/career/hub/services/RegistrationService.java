@@ -36,6 +36,7 @@ public class RegistrationService {
     public ResourceCreatedMessage registerStudent(RegisterStudentRequest request) throws JoseException {
         Student student = mapper.toStudentEntity(request);
         student.setRole(roleRepository.findByRoleName(RoleName.STUDENT));
+        student.setIsActive(false);
         userRepository.save(student);
         JsonWebSignature token = signedRegistrationToken.getObject();
         JwtClaims claims = registrationClaims.getObject();
@@ -55,6 +56,7 @@ public class RegistrationService {
         Company company = mapper.toCompanyEntity(request);
         System.out.println(roleRepository.findByRoleName(RoleName.COMPANY));
         company.setRole(roleRepository.findByRoleName(RoleName.COMPANY));
+        company.setIsActive(false);
         companyRepository.save(company);
         JsonWebSignature token = signedRegistrationToken.getObject();
         JwtClaims claims = registrationClaims.getObject();
@@ -73,6 +75,7 @@ public class RegistrationService {
     public ResourceCreatedMessage registerStaff(RegisterStaffRequest request) throws JoseException {
         Staff staff = mapper.toStaffEntity(request);
         staff.setRole(roleRepository.findByRoleName(RoleName.STAFF));
+        staff.setIsActive(false);
         staffRepository.save(staff);
         JsonWebSignature token = signedRegistrationToken.getObject();
         JwtClaims claims = registrationClaims.getObject();

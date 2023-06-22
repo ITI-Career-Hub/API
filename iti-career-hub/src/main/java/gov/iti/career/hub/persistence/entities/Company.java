@@ -17,10 +17,10 @@ import org.hibernate.annotations.Type;
 public class Company extends User {
 
     @Builder
-    public Company(Integer id, String username, String password, String email,
-                   Role role, String companyName, String description, String[] technologies,
-                   String country, String state, String city, String street) {
-        super(id, username, password, email, role, false);
+    public Company(Integer id, String username, String password, String email, String pictureUrl, Role role,
+                   Boolean isActive, String companyName, String description, String[] technologies, String country,
+                   String state, String city, String street, Boolean isDeleted) {
+        super(id, username, password, email, pictureUrl, role, isActive);
         this.companyName = companyName;
         this.description = description;
         this.technologies = technologies;
@@ -28,6 +28,7 @@ public class Company extends User {
         this.state = state;
         this.city = city;
         this.street = street;
+        this.isDeleted = isDeleted;
     }
 
     @Column(name = "company_name", nullable = true)

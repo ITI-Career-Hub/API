@@ -15,20 +15,22 @@ import java.util.Set;
 @ToString
 public class Student extends User{
 
+
     @Builder
-    public Student(Integer id,
-                   String username, String password, String email, Role role,
-                   String firstName, String lastName, String college, String phoneNumber,
-                   Short intakeNumber, Short graduationYear, Department department) {
-        super(id, username, password, email, role, false);
+    public Student(Integer id, String username, String password, String email, String pictureUrl, Role role,
+                   Boolean isActive, String firstName, String lastName, String college, String phoneNumber,
+                   Short intakeNumber, Short graduationYear, String resumeUrl, Department department,
+                   Set<Attendance> attendances) {
+        super(id, username, password, email, pictureUrl, role, isActive);
         this.firstName = firstName;
         this.lastName = lastName;
         this.college = college;
         this.phoneNumber = phoneNumber;
         this.intakeNumber = intakeNumber;
         this.graduationYear = graduationYear;
+        this.resumeUrl = resumeUrl;
         this.department = department;
-//        super.setRole(new Role(4, "STUDENT"));
+        this.attendances = attendances;
     }
 
     @Column(name = "first_name")
@@ -48,6 +50,9 @@ public class Student extends User{
 
     @Column(name = "graduation_year")
     private Short graduationYear;
+
+    @Column(name = "resume_url", nullable = false)
+    private String resumeUrl;
 
     @ManyToOne
     @JoinColumn(name = "department_id", nullable = false)

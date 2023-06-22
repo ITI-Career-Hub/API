@@ -1,8 +1,8 @@
-package gov.iti.career.hub.controllers.Departments;
+package gov.iti.career.hub.controllers.departments;
 import gov.iti.career.hub.persistence.entities.Department;
-import gov.iti.career.hub.controllers.Departments.dtos.requests.UpdateDepartmentRequest;
-import gov.iti.career.hub.controllers.Departments.dtos.responses.GetDepartmentResponse;
-import gov.iti.career.hub.controllers.Departments.dtos.responses.UpdateDepartmentResponse;
+import gov.iti.career.hub.controllers.departments.dtos.requests.UpdateDepartmentRequest;
+import gov.iti.career.hub.controllers.departments.dtos.responses.GetDepartmentResponse;
+import gov.iti.career.hub.controllers.departments.dtos.responses.UpdateDepartmentResponse;
 
 import gov.iti.career.hub.persistence.entities.Staff;
 import gov.iti.career.hub.persistence.repositories.StaffRepository;

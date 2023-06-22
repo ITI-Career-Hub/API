@@ -30,9 +30,7 @@ public class AppointmentService {
 
 
     public Collection<GetAppointmentResponse> findAllAppointments(){
-
         return appointmentMapper.toGetAllAppointmentsResponseDto(appointmentRepository.findAll());
-
     }
 
     public GetAppointmentResponse findAppointment(Integer id){
@@ -57,6 +55,7 @@ public class AppointmentService {
             );
         }
         appointment.setAttendances(attendances);
+        appointment.setIsApproved(false);
         return appointmentMapper.toAddAppointmentResponseDto(
                 appointmentRepository.save(appointment));
     }

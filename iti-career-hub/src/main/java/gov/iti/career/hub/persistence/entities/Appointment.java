@@ -11,9 +11,14 @@ import java.util.Set;
 
 @Entity
 @Table(name = "appointments",
-        uniqueConstraints = @UniqueConstraint(
-            columnNames = {"department_id", "company_id", "event_id"}
-        )
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        columnNames = {"department_id", "company_id", "event_id"}
+                ),
+                @UniqueConstraint(
+                        columnNames = {"appointment_date", "room_id"}
+                )
+        }
 )
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,9 +32,9 @@ public class Appointment {
     private Long id;
 
     @Column(name = "appointment_name", nullable = false)
-    private String appointment_name;
+    private String appointmentName;
 
-    @Column(name = "appointment_date", nullable = false)
+    @Column(name = "appointment_date")
     private LocalDate appointmentDate;
 
     @Column(name = "interview_type", nullable = false)
@@ -44,8 +49,9 @@ public class Appointment {
     )
     private String[] interviewers;
 
-    @Column(name = "room", nullable = false)
-    private String room;
+    @ManyToOne
+    @JoinColumn(name = "room_id")
+    private Room room;
 
     @Column(name = "interview_notes")
     private String interviewNotes;
@@ -58,10 +64,13 @@ public class Appointment {
     @JoinColumn(name = "company_id", nullable = false)
     private Company company;
 
+    @Column(name = "is_approved", nullable = false)
+    private Boolean isApproved;
+
     @ManyToOne
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
-    @OneToMany(mappedBy = "appointment", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "appointment", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private Set<Attendance> attendances = new HashSet<>();
 }

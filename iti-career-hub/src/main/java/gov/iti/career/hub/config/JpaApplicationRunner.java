@@ -56,12 +56,14 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .password("password")
                 .email("company@gmail.com")
                 .role(companyRole)
+                .pictureUrl("company.png")
                 .city("Giza")
                 .country("Egypt")
                 .state("Sheikh Zayed")
                 .street("Street 100")
                 .description("Company Description")
                 .technologies(new String[]{"JPA", "Springboot Framework"})
+                .isActive(true)
                 .build();
 
         Staff staff = Staff.builder()
@@ -69,9 +71,11 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .email("zyad.yasser@gmaiill.com")
                 .password("password")
                 .role(adminRole)
+                .pictureUrl("staff.png")
                 .firstName("zyad")
                 .lastName("yasser")
                 .department(jets)
+                .isActive(true)
                 .build();
 
         Student student = Student.builder()
@@ -82,10 +86,13 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .graduationYear((short) 2020)
                 .intakeNumber((short) 43)
                 .phoneNumber("01030503240")
+                .pictureUrl("student.png")
+                .resumeUrl("resumeURLLLLLLLLLL")
                 .role(studentRole)
                 .department(jets)
                 .firstName("khaled")
                 .lastName("hisham")
+                .isActive(true)
                 .build();
 
         Event event = Event.builder()
@@ -97,6 +104,8 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .country("Egypt")
                 .street("Haram")
                 .build();
+
+
 
         departmentRepository.save(jets);
         departmentRepository.save(mobile);

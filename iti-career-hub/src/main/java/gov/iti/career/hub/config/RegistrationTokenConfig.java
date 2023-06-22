@@ -26,7 +26,7 @@ public class RegistrationTokenConfig {
 
     @Value("registration.kid")
     private String hostname;
-    private int minutesToTokenExpiry = 1440; // FROM PROPERTIES FILE
+    private int minutesToTokenExpiry = 1440; //TODO: FROM PROPERTIES FILE
     @Bean
     public RsaJsonWebKey rsaJsonWebKey() throws JoseException {
         RsaJsonWebKey rsaJsonWebKey = RsaJwkGenerator.generateJwk(2048);

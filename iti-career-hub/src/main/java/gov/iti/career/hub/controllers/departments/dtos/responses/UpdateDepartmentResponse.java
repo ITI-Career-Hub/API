@@ -1,4 +1,4 @@
-package gov.iti.career.hub.controllers.Departments.dtos.responses;
+package gov.iti.career.hub.controllers.departments.dtos.responses;
 
 import gov.iti.career.hub.persistence.entities.enums.Discipline;
 

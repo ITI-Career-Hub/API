@@ -9,7 +9,7 @@ import gov.iti.career.hub.persistence.entities.Department;
 import gov.iti.career.hub.persistence.entities.Event;
 import gov.iti.career.hub.persistence.entities.enums.InterviewType;
 
-public record UpdateAppointmentRequest(String appointmentName, LocalDate appointmentDate, InterviewType interviewType, String[] interviewers, String room, String interviewNotes, 
-                                    Integer departmentId, Integer companyId, Integer eventId) implements Serializable {
-    
+public record UpdateAppointmentRequest(String appointmentName, LocalDate appointmentDate, InterviewType interviewType,
+                                       String[] interviewers, Integer roomId, String interviewNotes, Integer departmentId,
+                                       Integer companyId, Integer eventId) implements Serializable {
 }

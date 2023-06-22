@@ -1,21 +1,17 @@
-package gov.iti.career.hub.controllers.Departments;
+package gov.iti.career.hub.controllers.departments;
 
-import gov.iti.career.hub.controllers.Departments.dtos.requests.CreateDepartmentRequest;
-import gov.iti.career.hub.controllers.Departments.dtos.requests.UpdateDepartmentRequest;
-import gov.iti.career.hub.controllers.Departments.dtos.responses.GetDepartmentResponse;
-import gov.iti.career.hub.controllers.Departments.dtos.responses.UpdateDepartmentResponse;
-import gov.iti.career.hub.persistence.entities.Department;
-import gov.iti.career.hub.persistence.entities.Staff;
+import gov.iti.career.hub.controllers.departments.dtos.requests.CreateDepartmentRequest;
+import gov.iti.career.hub.controllers.departments.dtos.requests.UpdateDepartmentRequest;
+import gov.iti.career.hub.controllers.departments.dtos.responses.GetDepartmentResponse;
+import gov.iti.career.hub.controllers.departments.dtos.responses.UpdateDepartmentResponse;
 import gov.iti.career.hub.persistence.repositories.StaffRepository;
 import gov.iti.career.hub.services.DepartmentService;
-import gov.iti.career.hub.services.StaffService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
