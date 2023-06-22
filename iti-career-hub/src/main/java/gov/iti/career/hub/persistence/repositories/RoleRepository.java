@@ -10,6 +10,5 @@ import java.util.Optional;
 public interface RoleRepository extends JpaRepository<Role, Integer>
                                             , ListPagingAndSortingRepository<Role, Integer> {
 
-    @Query("SELECT r FROM Role r WHERE r.roleName = :name")
-    Optional<Role> findRoleByName(String name);
+    Role findByRoleName(String roleName);
 }

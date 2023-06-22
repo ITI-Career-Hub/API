@@ -1,5 +1,7 @@
 package gov.iti.career.hub.controllers.register;
 
+import gov.iti.career.hub.controllers.register.dtos.requests.RegisterCompanyRequest;
+import gov.iti.career.hub.controllers.register.dtos.requests.RegisterStaffRequest;
 import gov.iti.career.hub.controllers.register.dtos.requests.RegisterStudentRequest;
 import gov.iti.career.hub.services.RegistrationService;
 import lombok.AllArgsConstructor;
@@ -20,5 +22,15 @@ public class RegistrationController {
     @PostMapping("/student")
     public ResponseEntity<ResourceCreatedMessage> registerStudent(@RequestBody RegisterStudentRequest request) throws JoseException {
         return ResponseEntity.ok(registrationService.registerStudent(request));
+    }
+
+    @PostMapping("/company")
+    public ResponseEntity<ResourceCreatedMessage> registerCompany(@RequestBody RegisterCompanyRequest request) throws JoseException {
+        return ResponseEntity.ok(registrationService.registerCompany(request));
+    }
+
+    @PostMapping("/staff")
+    public ResponseEntity<ResourceCreatedMessage> registerStaff(@RequestBody RegisterStaffRequest request) throws JoseException {
+        return ResponseEntity.ok(registrationService.registerStaff(request));
     }
 }
