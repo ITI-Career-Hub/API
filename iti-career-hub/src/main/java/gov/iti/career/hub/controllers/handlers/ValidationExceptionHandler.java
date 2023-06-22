@@ -1,4 +1,4 @@
-package gov.iti.career.hub.controllers.exceptions.handlers;
+package gov.iti.career.hub.controllers.handlers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

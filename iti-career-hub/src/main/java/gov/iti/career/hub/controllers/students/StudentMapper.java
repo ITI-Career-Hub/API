@@ -22,12 +22,16 @@ public interface StudentMapper {
 
     @InheritConfiguration(name = "getAllStudentsResponseMappings")
     Student toEntity(GetAllStudentsResponse getAllStudentsResponse);
+   
     Student toEntity(UpdateStudentRequest updateStudentRequest);
+    
     @InheritInverseConfiguration(name = "getAllStudentsResponseMappings")
     Collection<GetAllStudentsResponse> collectionToDto(Collection<Student> students);
     UpdateStudentResponse toUpdateStudentResponseDto(Student student);
+   
     @InheritInverseConfiguration(name = "getAllStudentsResponseMappings")
     GetAllStudentsResponse toGetAllStudentsResponseDto(Student student);
+   
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Student partialUpdate(UpdateStudentRequest updateStudentRequest, @MappingTarget Student student);
 }
