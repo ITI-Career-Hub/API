@@ -12,10 +12,10 @@ import lombok.*;
 @ToString
 public class Staff extends User {
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name", nullable = true)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name", nullable = true)
     private String lastName;
 
     @ManyToOne
@@ -26,7 +26,7 @@ public class Staff extends User {
     public Staff(Integer id, String username, String password,
                  String email, Role role, String firstName,
                  String lastName, Department department) {
-        super(id, username, password, email, role);
+        super(id, username, password, email, role, false);
         this.firstName = firstName;
         this.lastName = lastName;
         this.department = department;

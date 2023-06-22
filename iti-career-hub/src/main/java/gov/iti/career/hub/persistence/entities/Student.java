@@ -9,6 +9,7 @@ import java.util.Set;
 @Entity
 @Table(name = "students")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -19,7 +20,7 @@ public class Student extends User{
                    String username, String password, String email, Role role,
                    String firstName, String lastName, String college, String phoneNumber,
                    Short intakeNumber, Short graduationYear, Department department) {
-        super(id, username, password, email, role);
+        super(id, username, password, email, role, false);
         this.firstName = firstName;
         this.lastName = lastName;
         this.college = college;
@@ -27,24 +28,25 @@ public class Student extends User{
         this.intakeNumber = intakeNumber;
         this.graduationYear = graduationYear;
         this.department = department;
+//        super.setRole(new Role(4, "STUDENT"));
     }
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "college", nullable = false)
+    @Column(name = "college")
     private String college;
 
-    @Column(name = "phone_number", nullable = false)
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     @Column(name = "intake_number", nullable = false)
     private Short intakeNumber;
 
-    @Column(name = "graduation_year", nullable = false)
+    @Column(name = "graduation_year")
     private Short graduationYear;
 
     @ManyToOne
