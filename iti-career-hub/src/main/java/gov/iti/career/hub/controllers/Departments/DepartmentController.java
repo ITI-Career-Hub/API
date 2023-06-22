@@ -38,10 +38,23 @@ public class DepartmentController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+    @PostMapping
+    public ResponseEntity<GetDepartmentResponse> createDepartment(@RequestBody CreateDepartmentRequest createRequest) {
+        GetDepartmentResponse department = departmentService.createDepartment(
+                createRequest.departmentName(),
+                createRequest.discipline(),
+                createRequest.managerId());
+        return ResponseEntity.status(HttpStatus.CREATED).body(department);
+    }
     @PutMapping("/{id}")
     public ResponseEntity<UpdateDepartmentResponse> updateDepartment(@RequestBody UpdateDepartmentRequest updateRequest) {
 
         UpdateDepartmentResponse department = departmentService.updateDepartment(updateRequest);
         return ResponseEntity.ok(department);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteDepartment(@PathVariable Integer id) {
+        departmentService.deleteDepartment(id);
+        return ResponseEntity.noContent().build();
     }
 }

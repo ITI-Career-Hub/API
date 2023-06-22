@@ -10,7 +10,9 @@ import gov.iti.career.hub.persistence.entities.enums.Discipline;
 import gov.iti.career.hub.persistence.repositories.DepartmentRepository;
 import gov.iti.career.hub.persistence.repositories.StaffRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
 import java.util.List;
@@ -22,12 +24,17 @@ public class DepartmentService {
 
     private  final DepartmentMapper departmentMapper;
     private final DepartmentRepository departmetRepository;
-    private final StaffService staffService;
-    public GetDepartmentResponse createDepartment(String departmentName, Discipline discipline, Staff manager) {
+    private final StaffRepository staffRepository;
+    public GetDepartmentResponse createDepartment(String departmentName, Discipline discipline, Integer managerId) {
         Department department = new Department();
+
         department.setDepartmentName(departmentName);
         department.setDiscipline(discipline);
-        department.setManager(manager);
+        Staff staff = staffRepository.findById(managerId)
+                .orElseThrow( () ->
+                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Manger Not Found")
+                );
+        department.setManager(staff);
         return departmentMapper.toGetDepartmentResponsedto( departmetRepository.save(department));
     }
 
