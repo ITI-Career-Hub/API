@@ -65,7 +65,6 @@ public class StaffService {
                 .orElseThrow( () ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Staff Not Found")
                 );
-        staff.setRole(roleRepository.findByRoleName("STAFF"));
         if(!staff.getIsActive()){
             staffMapper.partialUpdate(request, staff);
             staff.setIsActive(true);

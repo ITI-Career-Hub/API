@@ -30,30 +30,30 @@ public class Company extends User {
         this.street = street;
     }
 
-    @Column(name = "company_name", nullable = false)
+    @Column(name = "company_name", nullable = true)
     private String companyName;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description", nullable = true)
     private String description;
 
     @Type(StringArrayType.class)
     @Column(
             name = "technologies",
             columnDefinition = "text[]"
-            , nullable = false
+            , nullable = true
     )
     private String[] technologies;
 
-    @Column(name = "country", nullable = false)
+    @Column(name = "country", nullable = true)
     private String country;
 
-    @Column(name = "state", nullable = false)
+    @Column(name = "state", nullable = true)
     private String state;
 
-    @Column(name = "city", nullable = false)
+    @Column(name = "city", nullable = true)
     private String city;
 
-    @Column(name = "street", nullable = false)
+    @Column(name = "street", nullable = true)
     private String street;
 
     @Column(name = "is_deleted", columnDefinition = "BOOLEAN DEFAULT FALSE")

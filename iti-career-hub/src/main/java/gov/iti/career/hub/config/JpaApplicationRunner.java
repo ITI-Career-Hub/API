@@ -33,6 +33,10 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .roleName(RoleName.COMPANY)
                 .build();
 
+        Role staffRole = Role.builder()
+                .roleName(RoleName.STAFF)
+                .build();
+
         Department jets = Department.builder()
                 .departmentName("JETS")
                 .discipline(Discipline.SOFTWARE_ENGINEERING_AND_DEVELOPMENT)
@@ -86,6 +90,7 @@ public class JpaApplicationRunner implements ApplicationRunner {
         roleRepository.save(adminRole);
         roleRepository.save(companyRole);
         roleRepository.save(studentRole);
+        roleRepository.save(staffRole);
         userRepository.save(student);
         userRepository.save(staff);
         userRepository.save(company);

@@ -9,6 +9,7 @@ import gov.iti.career.hub.persistence.entities.Company;
 import gov.iti.career.hub.persistence.entities.Role;
 import gov.iti.career.hub.persistence.entities.Staff;
 import gov.iti.career.hub.persistence.entities.Student;
+import gov.iti.career.hub.persistence.entities.enums.RoleName;
 import gov.iti.career.hub.persistence.repositories.CompanyRepository;
 import gov.iti.career.hub.persistence.repositories.RoleRepository;
 import gov.iti.career.hub.persistence.repositories.StaffRepository;
@@ -34,51 +35,55 @@ public class RegistrationService {
     private final EmailService emailService;
     public ResourceCreatedMessage registerStudent(RegisterStudentRequest request) throws JoseException {
         Student student = mapper.toStudentEntity(request);
-        student.setRole(roleRepository.findByRoleName("STUDENT"));
+        student.setRole(roleRepository.findByRoleName(RoleName.STUDENT));
         userRepository.save(student);
         JsonWebSignature token = signedRegistrationToken.getObject();
         JwtClaims claims = registrationClaims.getObject();
         claims.setSubject(student.getId().toString());
         token.setPayload(claims.toJson());
-        emailService.sendEmail(
-                request.email(),
-                "CAREER HUB REGISTRATION",
-                token.getCompactSerialization()
-        );
+        System.out.println(token.getCompactSerialization());
+//        emailService.sendEmail(
+//                request.email(),
+//                "CAREER HUB REGISTRATION",
+//                token.getCompactSerialization()
+//        );
 
         return new ResourceCreatedMessage("Student Resource Created Successfully");
     }
 
     public ResourceCreatedMessage registerCompany(RegisterCompanyRequest request) throws JoseException {
         Company company = mapper.toCompanyEntity(request);
-        company.setRole(roleRepository.findByRoleName("COMPANY"));
+        System.out.println(roleRepository.findByRoleName(RoleName.COMPANY));
+        company.setRole(roleRepository.findByRoleName(RoleName.COMPANY));
         companyRepository.save(company);
         JsonWebSignature token = signedRegistrationToken.getObject();
         JwtClaims claims = registrationClaims.getObject();
         claims.setSubject(company.getId().toString());
         token.setPayload(claims.toJson());
-        emailService.sendEmail(
-                request.email(),
-                "CAREER HUB REGISTRATION",
-                token.getCompactSerialization()
-        );
+        System.out.println(token.getCompactSerialization());
+//        emailService.sendEmail(
+//                request.email(),
+//                "CAREER HUB REGISTRATION",
+//                token.getCompactSerialization()
+//        );
 
         return new ResourceCreatedMessage("Company Resource Created Successfully");
     }
 
     public ResourceCreatedMessage registerStaff(RegisterStaffRequest request) throws JoseException {
         Staff staff = mapper.toStaffEntity(request);
-        staff.setRole(roleRepository.findByRoleName("STAFF"));
+        staff.setRole(roleRepository.findByRoleName(RoleName.STAFF));
         staffRepository.save(staff);
         JsonWebSignature token = signedRegistrationToken.getObject();
         JwtClaims claims = registrationClaims.getObject();
         claims.setSubject(staff.getId().toString());
         token.setPayload(claims.toJson());
-        emailService.sendEmail(
-                request.email(),
-                "CAREER HUB REGISTRATION",
-                token.getCompactSerialization()
-        );
+        System.out.println(token.getCompactSerialization());
+//        emailService.sendEmail(
+//                request.email(),
+//                "CAREER HUB REGISTRATION",
+//                token.getCompactSerialization()
+//        );
 
         return new ResourceCreatedMessage("Staff Resource Created Successfully");
     }
