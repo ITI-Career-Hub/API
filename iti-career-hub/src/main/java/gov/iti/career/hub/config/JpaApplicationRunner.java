@@ -2,6 +2,7 @@ package gov.iti.career.hub.config;
 
 import gov.iti.career.hub.persistence.entities.*;
 import gov.iti.career.hub.persistence.entities.enums.Discipline;
+import gov.iti.career.hub.persistence.entities.enums.RoleName;
 import gov.iti.career.hub.persistence.repositories.*;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -20,12 +21,16 @@ public class JpaApplicationRunner implements ApplicationRunner {
     @Override
     @Transactional
     public void run(ApplicationArguments args) throws Exception {
-        Role admin = Role.builder()
-                .roleName("ADMIN")
+        Role adminRole = Role.builder()
+                .roleName(RoleName.ADMIN)
                 .build();
 
-        Role organizer = Role.builder()
-                .roleName("ORGANIZER")
+        Role studentRole = Role.builder()
+                .roleName(RoleName.STUDENT)
+                .build();
+
+        Role companyRole = Role.builder()
+                .roleName(RoleName.COMPANY)
                 .build();
 
         Department jets = Department.builder()
@@ -43,7 +48,7 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .username("khaleds")
                 .password("password")
                 .email("company@gmail.com")
-                .role(admin)
+                .role(companyRole)
                 .city("Giza")
                 .country("Egypt")
                 .state("Sheikh Zayed")
@@ -56,7 +61,7 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .username("zyad yasser")
                 .email("zyad.yasser@gmaiill.com")
                 .password("password")
-                .role(admin)
+                .role(adminRole)
                 .firstName("zyad")
                 .lastName("yasser")
                 .department(jets)
@@ -70,7 +75,7 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .graduationYear((short) 2020)
                 .intakeNumber((short) 43)
                 .phoneNumber("01030503240")
-                .role(admin)
+                .role(studentRole)
                 .department(jets)
                 .firstName("khaled")
                 .lastName("hisham")
@@ -78,8 +83,9 @@ public class JpaApplicationRunner implements ApplicationRunner {
 
         departmentRepository.save(jets);
         departmentRepository.save(mobile);
-        roleRepository.save(admin);
-        roleRepository.save(organizer);
+        roleRepository.save(adminRole);
+        roleRepository.save(companyRole);
+        roleRepository.save(studentRole);
         userRepository.save(student);
         userRepository.save(staff);
         userRepository.save(company);
