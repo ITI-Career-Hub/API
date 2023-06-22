@@ -6,7 +6,11 @@ import gov.iti.career.hub.controllers.companies.CompanyMapper;
 import gov.iti.career.hub.controllers.companies.dtos.requests.UpdateCompanyRequest;
 import gov.iti.career.hub.controllers.companies.dtos.requests.UpdateCompanyResponse;
 import gov.iti.career.hub.controllers.companies.dtos.responses.GetCompanyResponse;
+import gov.iti.career.hub.controllers.register.RegistrationMapper;
+import gov.iti.career.hub.controllers.register.dtos.requests.RegisterCompanyRequest;
+import gov.iti.career.hub.controllers.register.dtos.requests.RegisterStaffRequest;
 import gov.iti.career.hub.persistence.entities.Company;
+import gov.iti.career.hub.persistence.entities.Staff;
 import gov.iti.career.hub.persistence.repositories.CompanyRepository;
 import gov.iti.career.hub.persistence.repositories.RoleRepository;
 import lombok.AllArgsConstructor;
@@ -27,6 +31,7 @@ public class CompanyService {
     private final CompanyRepository companyRepository;
     private final RoleRepository roleRepository;
     private final CompanyMapper companyMapper;
+    private final RegistrationMapper mapper;
     private final JwtConsumer jwtConsumer;
 
     public Collection<GetCompanyResponse> findAllCompanies() {
@@ -66,5 +71,17 @@ public class CompanyService {
         }
         else throw new RuntimeException("Token Already Consumed Exception");
 
+    }
+
+    public RegisterCompanyRequest registerCompanyData(String token) throws InvalidJwtException, MalformedClaimException {
+        JwtClaims claims = jwtConsumer.processToClaims(token);
+        Integer companyId = Integer.parseInt(claims.getSubject());
+        Company company = companyRepository.findById(companyId).orElseThrow( () ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Company Not Found")
+        );
+        if(company.getIsActive()){
+            throw new RuntimeException("Token Already Consumed Exception");
+        }
+        return mapper.toRegisterCompanyRequest(company);
     }
 }

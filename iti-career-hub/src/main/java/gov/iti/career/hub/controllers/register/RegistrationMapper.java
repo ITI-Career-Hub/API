@@ -23,4 +23,9 @@ public interface RegistrationMapper {
 
     @Mapping(source = "department.id", target = "departmentId")
     public RegisterStudentRequest toRegisterStudentRequest(Student student);
+
+    @Mapping(source = "department.id", target = "departmentId")
+    public RegisterStaffRequest toRegisterStaffRequest(Staff staff);
+
+    public RegisterCompanyRequest toRegisterCompanyRequest(Company company);
 }

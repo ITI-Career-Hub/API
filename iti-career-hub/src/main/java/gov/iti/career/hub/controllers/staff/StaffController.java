@@ -2,6 +2,8 @@ package gov.iti.career.hub.controllers.staff;
 
 import gov.iti.career.hub.controllers.companies.dtos.requests.ActivateCompanyRequest;
 import gov.iti.career.hub.controllers.companies.dtos.responses.ActivateCompanyResponse;
+import gov.iti.career.hub.controllers.register.dtos.requests.RegisterCompanyRequest;
+import gov.iti.career.hub.controllers.register.dtos.requests.RegisterStaffRequest;
 import gov.iti.career.hub.controllers.staff.dtos.requests.ActivateStaffRequest;
 import gov.iti.career.hub.controllers.staff.dtos.requests.UpdateStaffRequest;
 import gov.iti.career.hub.controllers.staff.dtos.responses.ActivateStaffResponse;
@@ -44,5 +46,10 @@ public class StaffController {
     public ResponseEntity<ActivateStaffResponse> registerStudent(@RequestParam("token") String token,
                                                                  @RequestBody ActivateStaffRequest request) throws InvalidJwtException, MalformedClaimException {
         return ResponseEntity.ok(staffService.activateStaff(token, request));
+    }
+
+    @PostMapping("/validate")
+    public ResponseEntity<RegisterStaffRequest> registerStudentData(@RequestParam("token") String token) throws InvalidJwtException, MalformedClaimException {
+        return ResponseEntity.ok(staffService.registerStaffData(token));
     }
 }

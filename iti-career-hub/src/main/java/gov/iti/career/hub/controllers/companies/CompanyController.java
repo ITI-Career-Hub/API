@@ -6,6 +6,8 @@ import gov.iti.career.hub.controllers.companies.dtos.responses.ActivateCompanyRe
 import gov.iti.career.hub.controllers.companies.dtos.requests.UpdateCompanyRequest;
 import gov.iti.career.hub.controllers.companies.dtos.requests.UpdateCompanyResponse;
 import gov.iti.career.hub.controllers.companies.dtos.responses.GetCompanyResponse;
+import gov.iti.career.hub.controllers.register.dtos.requests.RegisterCompanyRequest;
+import gov.iti.career.hub.controllers.register.dtos.requests.RegisterStudentRequest;
 import gov.iti.career.hub.services.CompanyService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -42,5 +44,10 @@ public class CompanyController {
     public ResponseEntity<ActivateCompanyResponse> registerStudent(@RequestParam("token") String token,
                                                                    @RequestBody ActivateCompanyRequest request) throws InvalidJwtException, MalformedClaimException {
         return ResponseEntity.ok(companyService.activateCompany(token, request));
+    }
+
+    @PostMapping("/validate")
+    public ResponseEntity<RegisterCompanyRequest> registerStudentData(@RequestParam("token") String token) throws InvalidJwtException, MalformedClaimException {
+        return ResponseEntity.ok(companyService.registerCompanyData(token));
     }
 }

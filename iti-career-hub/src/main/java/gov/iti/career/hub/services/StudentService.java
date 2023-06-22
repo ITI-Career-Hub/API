@@ -77,6 +77,9 @@ public class StudentService {
         Student student = studentRepository.findById(studentId).orElseThrow( () ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Student Not Found")
         );
+        if(student.getIsActive()){
+            throw new RuntimeException("Token Already Consumed Exception");
+        }
         return mapper.toRegisterStudentRequest(student);
     }
 }
