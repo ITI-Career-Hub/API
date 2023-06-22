@@ -35,6 +35,10 @@ public class AppointmentService {
 
     }
 
+    public Collection<GetAppointmentResponse> findCompanyAppointments(Integer companyId){
+        return appointmentMapper.toGetAllAppointmentsResponseDto(appointmentRepository.findByCompany_Id(companyId));
+    }
+
     public GetAppointmentResponse findAppointment(Integer id){
         return appointmentMapper.toGetAllAppointmentsResponseDto(
                 appointmentRepository.findById(id).orElseThrow(() ->

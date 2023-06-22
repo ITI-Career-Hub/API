@@ -36,6 +36,12 @@ public class AppointmentController {
                 .ok(appointmentService.findAllAppointments());
     }
 
+    @GetMapping
+    public ResponseEntity<Collection<GetAppointmentResponse>> findCompanyAppointments(@PathVariable Integer companyId){
+        return ResponseEntity
+                .ok(appointmentService.findCompanyAppointments(companyId));
+    }
+
     @GetMapping("{id}")
     public ResponseEntity<GetAppointmentResponse> findAppointment(@PathVariable Integer id){
         return ResponseEntity

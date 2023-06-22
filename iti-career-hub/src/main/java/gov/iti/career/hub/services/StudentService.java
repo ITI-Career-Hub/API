@@ -40,10 +40,6 @@ public class StudentService {
             );
         return studentMapper.toGetStudentResponseDto(student);
     }
-    public Collection<GetStudentResponse> findAllStudents(){
-        return studentMapper.collectionToDto(studentRepository.findAll());
-    }
-
     public UpdateStudentResponse updateStudent(Integer id, UpdateStudentRequest request) {
         Student student = studentRepository.findById(id)
                             .orElseThrow( () ->
@@ -51,6 +47,13 @@ public class StudentService {
                             );
         studentMapper.partialUpdate(request, student);
         return studentMapper.toUpdateStudentResponseDto(studentRepository.save(student));
+    }
+
+    public Collection<GetStudentResponse> findAllStudents(){
+        return studentMapper.collectionToDto(studentRepository.findAll());
+    }
+    public Collection<GetStudentResponse> findStudentsByDepartment(Integer departmentId){
+        return studentMapper.collectionToDto(studentRepository.findByDepartment_Id(departmentId));
     }
 
     public ActivateStudentResponse activateStudent(String token, ActivateStudentRequest request)
