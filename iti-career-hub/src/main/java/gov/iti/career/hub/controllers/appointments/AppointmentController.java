@@ -40,12 +40,6 @@ public class AppointmentController {
                 .ok(appointmentService.findAppointment(id));
     }
 
-//    @PostMapping
-//    public ResponseEntity<AddAppointmentResponse> addAppointment(@Valid @RequestBody AddAppointmentRequest request){
-//        return ResponseEntity
-//                .ok(appointmentService.addAppointment(request));
-//    }
-
     @DeleteMapping("{id}")
     public ResponseEntity deleteAppointment(@PathVariable Integer id){
         appointmentService.deleteAppointment(id);
