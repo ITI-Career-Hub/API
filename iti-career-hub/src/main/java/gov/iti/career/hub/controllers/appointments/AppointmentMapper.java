@@ -106,6 +106,26 @@ public abstract class AppointmentMapper {
 
     public abstract Collection<GetAllAppointmentsByCompanyAndEvent> toGetAllAppointmentsByCompanyAndEventDto(Collection<Appointment> appointments);
 
+    @Mapping(source = "appointmentCompanyCompanyName", target = "appointment.company.companyName")
+    @Mapping(source = "appointmentCompanyId", target = "appointment.company.id")
+    @Mapping(source = "appointmentRoomName", target = "appointment.room.name")
+    @Mapping(source = "appointmentRoomId", target = "appointment.room.id")
+    @Mapping(source = "appointmentInterviewType", target = "appointment.interviewType")
+    @Mapping(source = "appointmentAppointmentDate", target = "appointment.appointmentDate")
+    @Mapping(source = "appointmentId", target = "appointment.id")
+    @Mapping(source = "studentId", target = "student.id")
+    abstract Attendance toAttendanceEntity(AttendanceResponse attendanceResponse);
+
+    @InheritInverseConfiguration(name = "toAttendanceEntity")
+    public abstract AttendanceResponse toAttendanceResponseDto(Attendance attendance);
+
+    @InheritInverseConfiguration(name = "toAttendanceEntity")
+    public abstract Collection<AttendanceResponse> toAttendanceResponseDto(Collection<Attendance> attendance);
+
+    @InheritConfiguration(name = "toAttendanceEntity")
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    abstract Attendance partialUpdate(AttendanceResponse attendanceResponse, @MappingTarget Attendance attendance);
+
 //    @Named("fetchRoomByName")
 //    protected Room fetchRoomById(Integer roomId) {
 //        return roomRepository.findById(roomId)

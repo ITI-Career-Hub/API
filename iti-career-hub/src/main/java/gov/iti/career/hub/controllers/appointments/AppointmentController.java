@@ -66,4 +66,9 @@ public class AppointmentController {
         return ResponseEntity
                 .ok(appointmentService.addAppointment(request));
     }
+
+    @GetMapping("/attendance/student/{id}")
+    public ResponseEntity<Collection<AttendanceResponse>> getStudentAttendance(@PathVariable Integer id){
+        return ResponseEntity.ok(appointmentService.getStudentAttendance(id));
+    }
 }

@@ -7,6 +7,7 @@ import gov.iti.career.hub.controllers.appointments.dtos.responses.*;
 import gov.iti.career.hub.controllers.companies.dtos.responses.GetAllAppointmentsByCompanyAndEvent;
 import gov.iti.career.hub.persistence.entities.Attendance;
 import gov.iti.career.hub.persistence.entities.enums.AttendanceStatus;
+import gov.iti.career.hub.persistence.repositories.AttendanceRepository;
 import gov.iti.career.hub.persistence.repositories.StudentRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ public class AppointmentService {
 
     private final AppointmentMapper appointmentMapper;
     private final AppointmentRepository appointmentRepository;
+    private final AttendanceRepository attendanceRepository;
     private final StudentRepository studentRepository;
 
 
@@ -93,6 +95,12 @@ public class AppointmentService {
     public Collection<GetAllAppointmentsByCompanyAndEvent> getAllAppointmentsByCompanyAndEvent(Integer companyId, Integer eventId) {
         return appointmentMapper.toGetAllAppointmentsByCompanyAndEventDto(
                 appointmentRepository.getAllAppointmentsByCompanyAndEvent(companyId, eventId)
+        );
+    }
+
+    public Collection<AttendanceResponse> getStudentAttendance(Integer id){
+        return appointmentMapper.toAttendanceResponseDto(
+                attendanceRepository.findByStudentIdAndAppointmentIsApprovedTrue(id)
         );
     }
 }
