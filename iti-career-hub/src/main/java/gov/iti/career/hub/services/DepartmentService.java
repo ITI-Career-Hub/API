@@ -17,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -43,8 +44,13 @@ public class DepartmentService {
                 .map(departmentMapper::toGetDepartmentResponsedto);
     }
 
-    public Collection<GetDepartmentResponse> getAllDepartments() {
+    public Collection<GetDepartmentResponse> getAllDepartments(Discipline discipline) {
         List<Department> departments = departmetRepository.findAll();
+        if(discipline != null){
+            departments = departments.stream()
+                    .filter(department -> department.getDiscipline().equals(discipline))
+                    .toList();
+        }
         return departmentMapper.toGetDepartmentsResponseDto(departments);
     }
 

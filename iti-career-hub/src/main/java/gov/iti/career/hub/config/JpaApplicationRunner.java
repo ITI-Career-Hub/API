@@ -96,6 +96,23 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .isActive(true)
                 .build();
 
+        Student khaleds = Student.builder()
+                .username("khaleds")
+                .password("password")
+                .email("khaled.m.hishams@gmail.com")
+                .college("universitys")
+                .graduationYear((short) 2020)
+                .intakeNumber((short) 43)
+                .phoneNumber("01030503240")
+                .pictureUrl("students.png")
+                .resumeUrl("resumeURLLLLLLLLLLs")
+                .role(studentRole)
+                .department(jets)
+                .firstName("khaleds")
+                .lastName("hishams")
+                .isActive(true)
+                .build();
+
         Event event = Event.builder()
                 .eventName("Fair43")
                 .startDate(LocalDate.now().minusDays(3))
@@ -135,6 +152,7 @@ public class JpaApplicationRunner implements ApplicationRunner {
         userRepository.save(student);
         userRepository.save(staff);
         userRepository.save(company);
+        userRepository.save(khaleds);
 
         eventRepository.save(event);
     }

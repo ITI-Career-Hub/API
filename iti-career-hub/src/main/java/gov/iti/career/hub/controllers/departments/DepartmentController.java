@@ -4,8 +4,11 @@ import gov.iti.career.hub.controllers.departments.dtos.requests.CreateDepartment
 import gov.iti.career.hub.controllers.departments.dtos.requests.UpdateDepartmentRequest;
 import gov.iti.career.hub.controllers.departments.dtos.responses.GetDepartmentResponse;
 import gov.iti.career.hub.controllers.departments.dtos.responses.UpdateDepartmentResponse;
+import gov.iti.career.hub.controllers.students.dtos.responses.GetAllStudentsInDepartmentResponse;
+import gov.iti.career.hub.persistence.entities.enums.Discipline;
 import gov.iti.career.hub.persistence.repositories.StaffRepository;
 import gov.iti.career.hub.services.DepartmentService;
+import gov.iti.career.hub.services.StudentService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,15 +21,16 @@ import java.util.Optional;
 @RequestMapping("/department")
 @AllArgsConstructor
 public class DepartmentController {
-    final  private DepartmentService departmentService;
-    final private StaffRepository staffRepository;
+    private final DepartmentService departmentService;
+    private final StudentService studentService;
 
 
     @GetMapping
-    public ResponseEntity<Collection<GetDepartmentResponse>> getAllDepartments() {
-        Collection<GetDepartmentResponse> departments = departmentService.getAllDepartments();
+    public ResponseEntity<Collection<GetDepartmentResponse>> getAllDepartments(@RequestParam(value = "discipline", required = false) Discipline discipline) {
+        Collection<GetDepartmentResponse> departments = departmentService.getAllDepartments(discipline);
         return ResponseEntity.ok(departments);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<GetDepartmentResponse> getDepartmentById(@PathVariable Integer id) {
         Optional<GetDepartmentResponse> departmentResponse = departmentService.getDepartmentById(id);
@@ -52,5 +56,10 @@ public class DepartmentController {
     public ResponseEntity<Void> deleteDepartment(@PathVariable Integer id) {
         departmentService.deleteDepartment(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("{id}/student")
+    public ResponseEntity<Collection<GetAllStudentsInDepartmentResponse>> findAllStudentsByDepartmentId(@PathVariable Integer id){
+        return ResponseEntity.ok(studentService.findAllActiveStudentsByDepartmentId(id));
     }
 }

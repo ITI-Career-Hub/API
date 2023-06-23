@@ -4,6 +4,7 @@ import gov.iti.career.hub.controllers.students.dtos.requests.ActivateStudentRequ
 import gov.iti.career.hub.controllers.students.dtos.requests.UpdateStudentRequest;
 import gov.iti.career.hub.controllers.students.dtos.responses.ActivateStudentResponse;
 import gov.iti.career.hub.controllers.students.dtos.responses.GetStudentResponse;
+import gov.iti.career.hub.controllers.students.dtos.responses.GetAllStudentsInDepartmentResponse;
 import gov.iti.career.hub.controllers.students.dtos.responses.UpdateStudentResponse;
 import gov.iti.career.hub.persistence.entities.Department;
 import gov.iti.career.hub.persistence.entities.Student;
@@ -69,10 +70,12 @@ public abstract class StudentMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     public abstract Student partialUpdate(ActivateStudentRequest activateStudentRequest, @MappingTarget Student student);
+
     @Named("fetchDepartmentById")
     protected Department fetchDepartmentById(Integer id) {
         return departmentRepository.findById(id)
                 .orElseThrow(() ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Department Not Found"));
     }
+    public abstract Collection<GetAllStudentsInDepartmentResponse> toGetAllStudentsInDepartmentResponseDto(Collection<Student> student);
 }
