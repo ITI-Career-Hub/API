@@ -23,7 +23,13 @@ public class SecurityConfig {
                         )
         );
 
-        http.authorizeHttpRequests( reg -> reg.anyRequest().authenticated());
+        http.authorizeHttpRequests( reg ->
+                reg.requestMatchers("/student/register").permitAll()
+                    .requestMatchers("/company/register").permitAll()
+                    .requestMatchers("/staff/register").permitAll()
+                    //.requestMatchers("/**").permitAll()
+                    .anyRequest().authenticated()
+        );
         return http.build();
     }
 }
