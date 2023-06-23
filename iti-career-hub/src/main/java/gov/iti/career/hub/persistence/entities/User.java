@@ -25,7 +25,7 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "picture_url", nullable = false)
+    @Column(name = "picture_url", nullable = true)
     String pictureUrl;
 
     @ManyToOne
