@@ -7,5 +7,5 @@ import java.io.Serializable;
  */
 public record UpdateCompanyResponse(Integer id, String username, String email, String companyName, String description,
                                     String[] technologies, String country, String state, String city,
-                                    String street) implements Serializable {
+                                    String street, String pictureUrl) implements Serializable {
 }

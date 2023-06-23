@@ -19,7 +19,8 @@ public record UpdateStudentRequest(
         String lastName,
         @Size(min = 10, max = 80, message = "College cannot be less than 10 or exceed 80 characters")
         String college,
-
+        String resumeUrl,
+        String pictureUrl,
         @Pattern(regexp = "^01[0125][0-9]{8}$", message = "Invalid phone number")
         String phoneNumber,
         @Min(value = 1, message = "Intake number must exceed 1")

@@ -38,12 +38,14 @@ public class StudentController {
     @PutMapping("{id}")
     public ResponseEntity<UpdateStudentResponse> updateStudent(@PathVariable Integer id,
                                                                @Valid @RequestBody UpdateStudentRequest request){
+        System.out.println(request);
         return ResponseEntity.ok(studentService.updateStudent(id, request));
     }
 
     @PostMapping("/register")
     public ResponseEntity<ActivateStudentResponse> registerStudent(@RequestParam("token") String token,
                                                                    @RequestBody ActivateStudentRequest request) throws InvalidJwtException, MalformedClaimException {
+        System.out.println(request);
         return ResponseEntity.ok(studentService.activateStudent(token, request));
     }
 

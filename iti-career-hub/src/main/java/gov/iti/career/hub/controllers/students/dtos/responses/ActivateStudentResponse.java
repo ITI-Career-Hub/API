@@ -9,7 +9,7 @@ import java.io.Serializable;
  * A DTO for the {@link gov.iti.career.hub.persistence.entities.Student} entity
  */
 public record ActivateStudentResponse(Integer id, String username, String email, Integer roleId, RoleName roleName,
-                                      String firstName, String lastName, String college, String phoneNumber,
+                                      String firstName, String lastName, String college, String phoneNumber, String resumeUrl, String pictureUrl,
                                       Short graduationYear, Integer departmentId, String departmentName,
                                       Discipline departmentDiscipline) implements Serializable {
 }

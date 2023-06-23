@@ -50,6 +50,7 @@ public class StudentService {
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Student Not Found")
             );
         studentMapper.partialUpdate(request, student);
+        System.out.println(student);
         return studentMapper.toUpdateStudentResponseDto(studentRepository.save(student));
     }
 
@@ -65,6 +66,7 @@ public class StudentService {
         if(!student.getIsActive()){
             studentMapper.partialUpdate(request, student);
             student.setIsActive(true);
+            System.out.println(student);
             return studentMapper.toActivateStudentResponseDto(studentRepository.save(student));
         }
         else throw new RuntimeException("Token Already Consumed Exception");

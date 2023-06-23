@@ -43,7 +43,7 @@ public abstract class StaffMapper {
     @Mapping(source = "roleId", target = "role.id")
     protected abstract Staff updateStaffResponseMappings(UpdateStaffResponse updateStaffResponse);
 
-    @Mapping(source = "departmentDepartmentName", target = "department.departmentName")
+    @Mapping(source = "departmentName", target = "department.departmentName")
     @Mapping(source = "departmentId", target = "department.id")
     @Mapping(source = "roleRoleName", target = "role.roleName")
     @Mapping(source = "roleId", target = "role.id")

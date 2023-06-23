@@ -9,5 +9,5 @@ import java.io.Serializable;
  */
 public record ActivateCompanyResponse(Integer id, String username, String email, Integer roleId, RoleName roleRoleName,
                                       String companyName, String description, String[] technologies, String country,
-                                      String state, String city, String street) implements Serializable {
+                                      String state, String city, String street, String pictureUrl) implements Serializable {
 }

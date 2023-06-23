@@ -27,9 +27,11 @@ public class SecurityConfig {
                 reg.requestMatchers("/student/register").permitAll()
                     .requestMatchers("/company/register").permitAll()
                     .requestMatchers("/staff/register").permitAll()
-                    //.requestMatchers("/**").permitAll()
+                    .requestMatchers("/**").permitAll()
                     .anyRequest().authenticated()
         );
+
+        http.csrf(csrf -> csrf.disable());
         return http.build();
     }
 }

@@ -10,5 +10,5 @@ import java.io.Serializable;
  */
 public record GetStaffResponse(Integer id, String username, String password, String email, Integer roleId,
                                RoleName roleName, String firstName, String lastName, Integer departmentId,
-                               String departmentName, Discipline departmentDiscipline)
+                               String departmentName, Discipline departmentDiscipline, String pictureUrl )
         implements Serializable {}

@@ -9,5 +9,5 @@ import java.io.Serializable;
  */
 public record UpdateStudentResponse(Integer id, String username, String email, String firstName, String lastName, String college,
                                     String phoneNumber, Short intakeNumber, Short graduationYear, Integer departmentId,
-                                    String departmentName) implements Serializable, Response {
+                                    String departmentName, String resumeUrl, String pictureUrl) implements Serializable, Response {
 }
