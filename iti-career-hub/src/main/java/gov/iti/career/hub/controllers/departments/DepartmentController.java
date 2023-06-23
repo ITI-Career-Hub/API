@@ -26,7 +26,7 @@ public class DepartmentController {
 
 
     @GetMapping
-    public ResponseEntity<Collection<GetDepartmentResponse>> getAllDepartments(@RequestParam("discipline") Discipline discipline) {
+    public ResponseEntity<Collection<GetDepartmentResponse>> getAllDepartments(@RequestParam(value = "discipline", required = false) Discipline discipline) {
         Collection<GetDepartmentResponse> departments = departmentService.getAllDepartments(discipline);
         return ResponseEntity.ok(departments);
     }
