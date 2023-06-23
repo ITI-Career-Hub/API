@@ -40,6 +40,13 @@ public class StudentService {
             );
         return studentMapper.toGetStudentResponseDto(student);
     }
+    public GetStudentResponse findStudentByUsername(String username){
+        Student student = studentRepository.findByUsername(username)
+                .orElseThrow( () ->
+                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Student Not Found")
+                );
+        return studentMapper.toGetStudentResponseDto(student);
+    }
     public Collection<GetStudentResponse> findAllStudents(){
         return studentMapper.collectionToDto(studentRepository.findAll());
     }

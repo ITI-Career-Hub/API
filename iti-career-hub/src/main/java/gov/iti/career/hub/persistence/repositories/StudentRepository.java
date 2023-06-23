@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListPagingAndSortingRepository;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public interface StudentRepository extends JpaRepository<Student, Integer>,
                                             ListPagingAndSortingRepository<Student, Integer> {
@@ -16,4 +17,6 @@ public interface StudentRepository extends JpaRepository<Student, Integer>,
             AND s.department.id = :id
         """)
     Collection<Student> findAllActiveStudentsByDepartmentId(Integer id);
+
+    Optional<Student> findByUsername(String username);
 }
