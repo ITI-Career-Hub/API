@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import gov.iti.career.hub.controllers.appointments.dtos.requests.ActivateAppointmentRequest;
 import gov.iti.career.hub.controllers.appointments.dtos.responses.*;
+import gov.iti.career.hub.controllers.companies.dtos.responses.GetAllAppointmentsByCompanyAndEvent;
 import gov.iti.career.hub.persistence.entities.Attendance;
 import gov.iti.career.hub.persistence.repositories.RoomRepository;
 import org.mapstruct.*;
@@ -97,6 +98,13 @@ public abstract class AppointmentMapper {
     @Mapping(source = "room.id", target = "roomId")
     public abstract ActivateAppointmentResponse toActivateAppointmentResponseDto(Appointment appointment);
 
+    @Mapping(source = "department.departmentName", target = "departmentName")
+    @Mapping(source = "department.id", target = "departmentId")
+    @Mapping(source = "room.name", target = "roomName")
+    @Mapping(source = "room.id", target = "roomId")
+    public abstract GetAllAppointmentsByCompanyAndEvent toGetAllAppointmentsByCompanyAndEventDto(Appointment appointment);
+
+    public abstract Collection<GetAllAppointmentsByCompanyAndEvent> toGetAllAppointmentsByCompanyAndEventDto(Collection<Appointment> appointments);
 
 //    @Named("fetchRoomByName")
 //    protected Room fetchRoomById(Integer roomId) {

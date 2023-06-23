@@ -91,7 +91,7 @@ public abstract class StaffMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     public abstract Staff partialUpdate(ActivateStaffRequest activateStaffRequest, @MappingTarget Staff staff);
 
-    @Mapping(source = "departmentDepartmentName", target = "department.departmentName")
+    @Mapping(source = "departmentName", target = "department.departmentName")
     @Mapping(source = "departmentId", target = "department.id")
     @Mapping(source = "roleRoleName", target = "role.roleName")
     @Mapping(source = "roleId", target = "role.id")

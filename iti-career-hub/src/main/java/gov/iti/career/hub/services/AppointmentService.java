@@ -4,6 +4,7 @@ import java.util.*;
 
 import gov.iti.career.hub.controllers.appointments.dtos.requests.ActivateAppointmentRequest;
 import gov.iti.career.hub.controllers.appointments.dtos.responses.*;
+import gov.iti.career.hub.controllers.companies.dtos.responses.GetAllAppointmentsByCompanyAndEvent;
 import gov.iti.career.hub.persistence.entities.Attendance;
 import gov.iti.career.hub.persistence.entities.enums.AttendanceStatus;
 import gov.iti.career.hub.persistence.repositories.StudentRepository;
@@ -89,4 +90,9 @@ public class AppointmentService {
         return appointmentMapper.toActivateAppointmentResponseDto(appointmentRepository.save(appointment));
     }
 
+    public Collection<GetAllAppointmentsByCompanyAndEvent> getAllAppointmentsByCompanyAndEvent(Integer companyId, Integer eventId) {
+        return appointmentMapper.toGetAllAppointmentsByCompanyAndEventDto(
+                appointmentRepository.getAllAppointmentsByCompanyAndEvent(companyId, eventId)
+        );
+    }
 }

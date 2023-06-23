@@ -16,4 +16,11 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
                 WHERE a.appointmentDate = :date
             """)
     Collection<Appointment> findByAppointmentDate(LocalDate date);
+
+    @Query("""
+            SELECT a FROM Appointment a
+            WHERE a.event.id = :eventId
+            AND a.company.id = :companyId
+        """)
+    Collection<Appointment> getAllAppointmentsByCompanyAndEvent(Integer companyId, Integer eventId);
 }

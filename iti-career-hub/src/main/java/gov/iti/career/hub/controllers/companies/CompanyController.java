@@ -5,9 +5,11 @@ import gov.iti.career.hub.controllers.companies.dtos.requests.ActivateCompanyReq
 import gov.iti.career.hub.controllers.companies.dtos.responses.ActivateCompanyResponse;
 import gov.iti.career.hub.controllers.companies.dtos.requests.UpdateCompanyRequest;
 import gov.iti.career.hub.controllers.companies.dtos.requests.UpdateCompanyResponse;
+import gov.iti.career.hub.controllers.companies.dtos.responses.GetAllAppointmentsByCompanyAndEvent;
 import gov.iti.career.hub.controllers.companies.dtos.responses.GetCompanyResponse;
 import gov.iti.career.hub.controllers.register.dtos.requests.RegisterCompanyRequest;
 import gov.iti.career.hub.controllers.register.dtos.requests.RegisterStudentRequest;
+import gov.iti.career.hub.services.AppointmentService;
 import gov.iti.career.hub.services.CompanyService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -24,6 +26,8 @@ import java.util.Collection;
 public class CompanyController {
 
     private final CompanyService companyService;
+    private final AppointmentService appointmentService;
+
     @GetMapping
     public ResponseEntity<Collection<GetCompanyResponse>> findAllCompanies(){
         return ResponseEntity
@@ -49,5 +53,11 @@ public class CompanyController {
     @PostMapping("/validate")
     public ResponseEntity<RegisterCompanyRequest> registerStudentData(@RequestParam("token") String token) throws InvalidJwtException, MalformedClaimException {
         return ResponseEntity.ok(companyService.registerCompanyData(token));
+    }
+
+    @GetMapping("{companyId}/event/{eventId}/appointment")
+    public ResponseEntity<Collection<GetAllAppointmentsByCompanyAndEvent>> getAllAppointmentsByCompanyAndEvent(@PathVariable Integer companyId,
+                                                                                                   @PathVariable Integer eventId ){
+        return ResponseEntity.ok(appointmentService.getAllAppointmentsByCompanyAndEvent(companyId, eventId));
     }
 }
