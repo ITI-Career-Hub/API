@@ -61,6 +61,14 @@ public class StaffService {
         return staffMapper.toGetStaffResponseDto(staff);
     }
 
+    public GetStaffResponse findStaffByUserName(String username) {
+        Staff staff = staffRepository.findByUsername(username)
+                .orElseThrow( () ->
+                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Staff Not Found")
+                );
+        return staffMapper.toGetStaffResponseDto(staff);
+    }
+
     public ActivateStaffResponse activateStaff(String token, ActivateStaffRequest request)
             throws InvalidJwtException, MalformedClaimException {
 

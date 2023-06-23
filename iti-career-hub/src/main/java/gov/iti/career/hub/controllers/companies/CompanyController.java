@@ -39,6 +39,13 @@ public class CompanyController {
         return ResponseEntity
                 .ok(companyService.findCompanyById(id));
     }
+
+    @GetMapping("/username/{username}")
+    public ResponseEntity<GetCompanyResponse> findCompanyByUsername(@PathVariable String username){
+        return ResponseEntity
+                .ok(companyService.findCompanyByUsername(username));
+    }
+
     @PutMapping("{id}")
     public ResponseEntity<UpdateCompanyResponse> updateCompany(@PathVariable Integer id, @Valid @RequestBody UpdateCompanyRequest request){
         return ResponseEntity.ok(companyService.updateCompany(id, request));

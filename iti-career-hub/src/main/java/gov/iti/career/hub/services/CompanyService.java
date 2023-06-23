@@ -55,6 +55,14 @@ public class CompanyService {
         return companyMapper.toGetCompanyResponseDto(company);
     }
 
+    public GetCompanyResponse findCompanyByUsername(String username) {
+        Company company = companyRepository.findByUsername(username)
+                .orElseThrow( () ->
+                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Company Not Found")
+                );
+        return companyMapper.toGetCompanyResponseDto(company);
+    }
+
     public ActivateCompanyResponse activateCompany(String token, ActivateCompanyRequest request)
             throws InvalidJwtException, MalformedClaimException {
 

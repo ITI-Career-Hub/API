@@ -32,9 +32,15 @@ public class StaffController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<GetStaffResponse> findAllStaff(@PathVariable Integer id){
+    public ResponseEntity<GetStaffResponse> findStaffById(@PathVariable Integer id){
         return ResponseEntity
                 .ok(staffService.findStaffById(id));
+    }
+
+    @GetMapping("/username/{username}")
+    public ResponseEntity<GetStaffResponse> findStaffByUsername(@PathVariable String username){
+        return ResponseEntity
+                .ok(staffService.findStaffByUserName(username));
     }
 
     @PutMapping("{id}")
