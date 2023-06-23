@@ -6,6 +6,7 @@ import gov.iti.career.hub.controllers.students.StudentMapper;
 import gov.iti.career.hub.controllers.students.dtos.requests.ActivateStudentRequest;
 import gov.iti.career.hub.controllers.students.dtos.requests.UpdateStudentRequest;
 import gov.iti.career.hub.controllers.students.dtos.responses.ActivateStudentResponse;
+import gov.iti.career.hub.controllers.students.dtos.responses.GetAllStudentsInDepartmentResponse;
 import gov.iti.career.hub.controllers.students.dtos.responses.GetStudentResponse;
 import gov.iti.career.hub.controllers.students.dtos.responses.UpdateStudentResponse;
 import gov.iti.career.hub.persistence.entities.Role;
@@ -30,7 +31,6 @@ public class StudentService {
     private final StudentMapper studentMapper;
     private final StudentRepository studentRepository;
     private final RegistrationMapper mapper;
-//    private final RoleRepository roleRepository;
     private final JwtConsumer jwtConsumer;
 
     public GetStudentResponse findStudentById(Integer id){
@@ -46,9 +46,9 @@ public class StudentService {
 
     public UpdateStudentResponse updateStudent(Integer id, UpdateStudentRequest request) {
         Student student = studentRepository.findById(id)
-                            .orElseThrow( () ->
-                                new ResponseStatusException(HttpStatus.NOT_FOUND, "Student Not Found")
-                            );
+            .orElseThrow( () ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Student Not Found")
+            );
         studentMapper.partialUpdate(request, student);
         return studentMapper.toUpdateStudentResponseDto(studentRepository.save(student));
     }
@@ -81,5 +81,8 @@ public class StudentService {
             throw new RuntimeException("Token Already Consumed Exception");
         }
         return mapper.toRegisterStudentRequest(student);
+    }
+    public Collection<GetAllStudentsInDepartmentResponse> findAllActiveStudentsByDepartmentId(Integer id) {
+        return studentMapper.toGetAllStudentsInDepartmentResponseDto(studentRepository.findAllActiveStudentsByDepartmentId(id));
     }
 }
