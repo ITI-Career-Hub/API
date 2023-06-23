@@ -2,7 +2,8 @@ package gov.iti.career.hub.controllers.appointments;
 
 import java.util.Collection;
 
-import gov.iti.career.hub.controllers.appointments.dtos.responses.GetAttendanceResponse;
+import gov.iti.career.hub.controllers.appointments.dtos.requests.ActivateAppointmentRequest;
+import gov.iti.career.hub.controllers.appointments.dtos.responses.*;
 import gov.iti.career.hub.persistence.entities.Attendance;
 import gov.iti.career.hub.persistence.repositories.RoomRepository;
 import org.mapstruct.*;
@@ -10,9 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import gov.iti.career.hub.controllers.appointments.dtos.requests.AddAppointmentRequest;
 import gov.iti.career.hub.controllers.appointments.dtos.requests.UpdateAppointmentRequest;
-import gov.iti.career.hub.controllers.appointments.dtos.responses.AddAppointmentResponse;
-import gov.iti.career.hub.controllers.appointments.dtos.responses.GetAppointmentResponse;
-import gov.iti.career.hub.controllers.appointments.dtos.responses.UpdateAppointmentResponse;
 import gov.iti.career.hub.persistence.entities.Appointment;
 
 
@@ -81,6 +79,24 @@ public abstract class AppointmentMapper {
     public abstract Attendance partialUpdate(GetAttendanceResponse getAttendanceResponse, @MappingTarget Attendance attendance);
 
     public abstract Collection<GetAttendanceResponse> toDto(Collection<Attendance> attendances);
+
+    @Mapping(source = "roomId", target = "room.id")
+    public abstract Appointment toEntity(ActivateAppointmentRequest activateAppointmentRequest);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(source = "roomId", target = "room.id")
+    public abstract Appointment partialUpdate(ActivateAppointmentRequest activateAppointmentRequest, @MappingTarget Appointment appointment);
+
+
+    @Mapping(source = "company.companyName", target = "companyName")
+    @Mapping(source = "company.email", target = "companyEmail")
+    @Mapping(source = "company.id", target = "companyId")
+    @Mapping(source = "department.departmentName", target = "departmentName")
+    @Mapping(source = "department.id", target = "departmentId")
+    @Mapping(source = "room.name", target = "roomName")
+    @Mapping(source = "room.id", target = "roomId")
+    public abstract ActivateAppointmentResponse toActivateAppointmentResponseDto(Appointment appointment);
+
 
 //    @Named("fetchRoomByName")
 //    protected Room fetchRoomById(Integer roomId) {

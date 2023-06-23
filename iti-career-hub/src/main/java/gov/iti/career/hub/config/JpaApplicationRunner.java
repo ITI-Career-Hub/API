@@ -20,6 +20,7 @@ public class JpaApplicationRunner implements ApplicationRunner {
     private final RoleRepository roleRepository;
     private final DepartmentRepository departmentRepository;
     private final EventRepository eventRepository;
+    private final RoomRepository roomRepository;
 
     @Override
     @Transactional
@@ -105,17 +106,36 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .street("Haram")
                 .build();
 
+        Room room1 = Room.builder()
+                .name("1029")
+                .build();
+        Room room2 = Room.builder()
+                .name("1030")
+                .build();
+        Room room3 = Room.builder()
+                .name("1031")
+                .build();
+        Room room4 = Room.builder()
+                .name("1032")
+                .build();
 
+        roomRepository.save(room1);
+        roomRepository.save(room2);
+        roomRepository.save(room3);
+        roomRepository.save(room4);
 
         departmentRepository.save(jets);
         departmentRepository.save(mobile);
+
         roleRepository.save(adminRole);
         roleRepository.save(companyRole);
         roleRepository.save(studentRole);
         roleRepository.save(staffRole);
+
         userRepository.save(student);
         userRepository.save(staff);
         userRepository.save(company);
+
         eventRepository.save(event);
     }
 }

@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Collection;
 
 @RestController
@@ -32,6 +33,10 @@ public class RoomController {
         );
     }
 
+    @GetMapping("/available")
+    public ResponseEntity<Collection<GetRoomResponse>> getAvailableRooms(@RequestParam("date") LocalDate date){
+        return ResponseEntity.ok(roomService.getAvailableRooms(date));
+    }
     @PostMapping
     public ResponseEntity<GetRoomResponse> addRoom(@Valid @RequestBody AddRoomRequest request){
         return ResponseEntity.ok(roomService.addRoom(request));

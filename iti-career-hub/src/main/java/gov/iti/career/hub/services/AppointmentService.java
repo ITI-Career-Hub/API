@@ -2,7 +2,8 @@ package gov.iti.career.hub.services;
 
 import java.util.*;
 
-import gov.iti.career.hub.controllers.appointments.dtos.responses.GetAttendanceResponse;
+import gov.iti.career.hub.controllers.appointments.dtos.requests.ActivateAppointmentRequest;
+import gov.iti.career.hub.controllers.appointments.dtos.responses.*;
 import gov.iti.career.hub.persistence.entities.Attendance;
 import gov.iti.career.hub.persistence.entities.enums.AttendanceStatus;
 import gov.iti.career.hub.persistence.repositories.StudentRepository;
@@ -13,9 +14,6 @@ import org.springframework.web.server.ResponseStatusException;
 import gov.iti.career.hub.controllers.appointments.AppointmentMapper;
 import gov.iti.career.hub.controllers.appointments.dtos.requests.AddAppointmentRequest;
 import gov.iti.career.hub.controllers.appointments.dtos.requests.UpdateAppointmentRequest;
-import gov.iti.career.hub.controllers.appointments.dtos.responses.AddAppointmentResponse;
-import gov.iti.career.hub.controllers.appointments.dtos.responses.GetAppointmentResponse;
-import gov.iti.career.hub.controllers.appointments.dtos.responses.UpdateAppointmentResponse;
 import gov.iti.career.hub.persistence.entities.Appointment;
 import gov.iti.career.hub.persistence.repositories.AppointmentRepository;
 import lombok.AllArgsConstructor;
@@ -80,4 +78,15 @@ public class AppointmentService {
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Appointment Not Found")).getAttendances()
         );
     }
+
+    public ActivateAppointmentResponse approveAppointment(Integer id, ActivateAppointmentRequest request) {
+        Appointment appointment = appointmentRepository.findById(id)
+                .orElseThrow( () ->
+                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Appointment Not Found")
+                );
+        appointment.setIsApproved(true);
+        appointmentMapper.partialUpdate(request, appointment);
+        return appointmentMapper.toActivateAppointmentResponseDto(appointmentRepository.save(appointment));
+    }
+
 }

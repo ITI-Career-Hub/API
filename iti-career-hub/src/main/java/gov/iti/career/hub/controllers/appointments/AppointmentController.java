@@ -2,7 +2,8 @@ package gov.iti.career.hub.controllers.appointments;
 
 import java.util.Collection;
 
-import gov.iti.career.hub.controllers.appointments.dtos.responses.GetAttendanceResponse;
+import gov.iti.career.hub.controllers.appointments.dtos.requests.ActivateAppointmentRequest;
+import gov.iti.career.hub.controllers.appointments.dtos.responses.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import gov.iti.career.hub.controllers.appointments.dtos.requests.AddAppointmentRequest;
 import gov.iti.career.hub.controllers.appointments.dtos.requests.UpdateAppointmentRequest;
-import gov.iti.career.hub.controllers.appointments.dtos.responses.AddAppointmentResponse;
-import gov.iti.career.hub.controllers.appointments.dtos.responses.GetAppointmentResponse;
-import gov.iti.career.hub.controllers.appointments.dtos.responses.UpdateAppointmentResponse;
 
 import gov.iti.career.hub.services.AppointmentService;
 import jakarta.validation.Valid;
@@ -62,6 +60,11 @@ public class AppointmentController {
     @GetMapping("{id}/attendance")
     public ResponseEntity<Collection<GetAttendanceResponse>> getAppointmentAttendances(@PathVariable Integer id){
         return ResponseEntity.ok(appointmentService.getAppointmentAttendances(id));
+    }
+
+    @PutMapping("{id}/approve")
+    public ResponseEntity<ActivateAppointmentResponse> activateAppointment(@PathVariable Integer id, @Valid @RequestBody ActivateAppointmentRequest request){
+        return ResponseEntity.ok(appointmentService.approveAppointment(id, request));
     }
 
     @PostMapping
