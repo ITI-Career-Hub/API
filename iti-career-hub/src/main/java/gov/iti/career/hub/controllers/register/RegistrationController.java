@@ -21,19 +21,19 @@ public class RegistrationController {
     private final RegistrationService registrationService;
 
     @PostMapping("/student")
-    @PreAuthorize("hasAuthority('ADMIN')")
+//    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<ResourceCreatedMessage> registerStudent(@RequestBody RegisterStudentRequest request) throws JoseException {
         return ResponseEntity.ok(registrationService.registerStudent(request));
     }
 
     @PostMapping("/company")
-    @PreAuthorize("hasAuthority('ADMIN')")
+//    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<ResourceCreatedMessage> registerCompany(@RequestBody RegisterCompanyRequest request) throws JoseException {
         return ResponseEntity.ok(registrationService.registerCompany(request));
     }
 
     @PostMapping("/staff")
-    @PreAuthorize("hasAuthority('ADMIN')")
+//    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<ResourceCreatedMessage> registerStaff(@RequestBody RegisterStaffRequest request) throws JoseException {
         return ResponseEntity.ok(registrationService.registerStaff(request));
     }
