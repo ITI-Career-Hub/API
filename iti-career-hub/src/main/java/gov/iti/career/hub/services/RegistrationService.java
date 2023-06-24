@@ -19,6 +19,7 @@ import org.jose4j.jws.JsonWebSignature;
 import org.jose4j.jwt.JwtClaims;
 import org.jose4j.lang.JoseException;
 import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,6 +34,7 @@ public class RegistrationService {
     private final ObjectFactory<JsonWebSignature> signedRegistrationToken;
     private final ObjectFactory<JwtClaims> registrationClaims;
     private final EmailService emailService;
+
     public ResourceCreatedMessage registerStudent(RegisterStudentRequest request) throws JoseException {
         Student student = mapper.toStudentEntity(request);
         student.setRole(roleRepository.findByRoleName(RoleName.STUDENT));
@@ -43,11 +45,12 @@ public class RegistrationService {
         claims.setSubject(student.getId().toString());
         token.setPayload(claims.toJson());
         System.out.println(token.getCompactSerialization());
-//        emailService.sendEmail(
-//                request.email(),
-//                "CAREER HUB REGISTRATION",
-//                token.getCompactSerialization()
-//        );
+        String email = "http://localhost:4200"+"/student/signup/"+token.getCompactSerialization();
+        emailService.sendEmail(
+                request.email(),
+                "CAREER HUB REGISTRATION",
+                email
+        );
 
         return new ResourceCreatedMessage("Student Resource Created Successfully");
     }
@@ -63,11 +66,12 @@ public class RegistrationService {
         claims.setSubject(company.getId().toString());
         token.setPayload(claims.toJson());
         System.out.println(token.getCompactSerialization());
-//        emailService.sendEmail(
-//                request.email(),
-//                "CAREER HUB REGISTRATION",
-//                token.getCompactSerialization()
-//        );
+        String email = "http://localhost:4200"+"/company/signup/"+token.getCompactSerialization();
+        emailService.sendEmail(
+                request.email(),
+                "CAREER HUB REGISTRATION",
+                email
+        );
 
         return new ResourceCreatedMessage("Company Resource Created Successfully");
     }
@@ -82,11 +86,12 @@ public class RegistrationService {
         claims.setSubject(staff.getId().toString());
         token.setPayload(claims.toJson());
         System.out.println(token.getCompactSerialization());
-//        emailService.sendEmail(
-//                request.email(),
-//                "CAREER HUB REGISTRATION",
-//                token.getCompactSerialization()
-//        );
+        String email = "http://localhost:4200"+"/staff/signup/"+token.getCompactSerialization();
+        emailService.sendEmail(
+                request.email(),
+                "CAREER HUB REGISTRATION",
+                email
+        );
 
         return new ResourceCreatedMessage("Staff Resource Created Successfully");
     }

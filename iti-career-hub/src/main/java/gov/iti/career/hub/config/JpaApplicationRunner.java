@@ -71,7 +71,7 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .username("zyad yasser")
                 .email("zyad.yasser@gmaiill.com")
                 .password("password")
-                .role(adminRole)
+                .role(staffRole)
                 .pictureUrl("staff.png")
                 .firstName("zyad")
                 .lastName("yasser")

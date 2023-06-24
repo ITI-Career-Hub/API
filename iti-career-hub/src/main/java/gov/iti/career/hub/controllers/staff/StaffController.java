@@ -31,10 +31,22 @@ public class StaffController {
                 .ok(staffService.findAllStaff());
     }
 
+    @GetMapping("/department/{id}")
+    public ResponseEntity<Collection<GetStaffResponse>> findAllStaffByDepartment(@PathVariable Integer id){
+        return ResponseEntity
+                .ok(staffService.getAllStaffByDepartmentId(id));
+    }
+
     @GetMapping("{id}")
-    public ResponseEntity<GetStaffResponse> findAllStaff(@PathVariable Integer id){
+    public ResponseEntity<GetStaffResponse> findStaffById(@PathVariable Integer id){
         return ResponseEntity
                 .ok(staffService.findStaffById(id));
+    }
+
+    @GetMapping("/username/{username}")
+    public ResponseEntity<GetStaffResponse> findStaffByUsername(@PathVariable String username){
+        return ResponseEntity
+                .ok(staffService.findStaffByUserName(username));
     }
 
     @PutMapping("{id}")

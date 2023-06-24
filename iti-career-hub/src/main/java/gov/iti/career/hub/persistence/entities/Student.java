@@ -51,7 +51,7 @@ public class Student extends User{
     @Column(name = "graduation_year")
     private Short graduationYear;
 
-    @Column(name = "resume_url", nullable = false)
+    @Column(name = "resume_url", nullable = true)
     private String resumeUrl;
 
     @ManyToOne

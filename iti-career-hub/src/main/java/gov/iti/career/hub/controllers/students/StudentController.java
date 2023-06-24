@@ -31,9 +31,19 @@ public class StudentController {
                 .ok(studentService.findAllStudents());
     }
 
+    @GetMapping("/department/{id}")
+    public ResponseEntity<Collection<GetStudentResponse>> findAllStudentsByDepartment(@PathVariable Integer id){
+        return ResponseEntity
+                .ok(studentService.getAllStudentsByDepartmentId(id));
+    }
+
     @GetMapping("{id}")
     public ResponseEntity<GetStudentResponse> findStudentById(@PathVariable Integer id){
         return ResponseEntity.ok(studentService.findStudentById(id));
+    }
+    @GetMapping("/uasername/{username}")
+    public ResponseEntity<GetStudentResponse> findStudentByUsername(@PathVariable String username){
+        return ResponseEntity.ok(studentService.findStudentByUsername(username));
     }
     @PutMapping("{id}")
     public ResponseEntity<UpdateStudentResponse> updateStudent(@PathVariable Integer id,

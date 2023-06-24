@@ -27,6 +27,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -61,6 +62,14 @@ public class StaffService {
         return staffMapper.toGetStaffResponseDto(staff);
     }
 
+    public GetStaffResponse findStaffByUserName(String username) {
+        Staff staff = staffRepository.findByUsername(username)
+                .orElseThrow( () ->
+                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Staff Not Found")
+                );
+        return staffMapper.toGetStaffResponseDto(staff);
+    }
+
     public ActivateStaffResponse activateStaff(String token, ActivateStaffRequest request)
             throws InvalidJwtException, MalformedClaimException {
 
@@ -89,5 +98,10 @@ public class StaffService {
             throw new RuntimeException("Token Already Consumed Exception");
         }
         return mapper.toRegisterStaffRequest(staff);
+    }
+
+    public Collection<GetStaffResponse> getAllStaffByDepartmentId(Integer departmentId) {
+        return staffMapper.collectionToDto(
+                staffRepository.findAllByDepartmentId(departmentId));
     }
 }
