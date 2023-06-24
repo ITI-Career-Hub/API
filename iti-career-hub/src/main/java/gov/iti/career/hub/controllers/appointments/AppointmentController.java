@@ -4,15 +4,9 @@ import java.util.Collection;
 
 import gov.iti.career.hub.controllers.appointments.dtos.requests.ActivateAppointmentRequest;
 import gov.iti.career.hub.controllers.appointments.dtos.responses.*;
+import gov.iti.career.hub.persistence.entities.enums.AttendanceStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import gov.iti.career.hub.controllers.appointments.dtos.requests.AddAppointmentRequest;
 import gov.iti.career.hub.controllers.appointments.dtos.requests.UpdateAppointmentRequest;
@@ -52,7 +46,7 @@ public class AppointmentController {
     }
 
     @GetMapping("{id}/attendance")
-    public ResponseEntity<Collection<GetAttendanceResponse>> getAppointmentAttendances(@PathVariable Integer id){
+    public ResponseEntity<Collection<AttendanceResponse>> getAppointmentAttendances(@PathVariable Integer id){
         return ResponseEntity.ok(appointmentService.getAppointmentAttendances(id));
     }
 
@@ -70,5 +64,11 @@ public class AppointmentController {
     @GetMapping("/attendance/student/{id}")
     public ResponseEntity<Collection<AttendanceResponse>> getStudentAttendance(@PathVariable Integer id){
         return ResponseEntity.ok(appointmentService.getStudentAttendance(id));
+    }
+
+    @PutMapping("/attendance/{id}")
+    public ResponseEntity updateAttendanceStatus(@PathVariable Integer id, @RequestParam("newStatus") AttendanceStatus newStatus){
+        appointmentService.changeAttendanceStatus(id, newStatus);
+        return ResponseEntity.ok().build();
     }
 }

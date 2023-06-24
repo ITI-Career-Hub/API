@@ -9,9 +9,9 @@ import java.time.LocalDate;
 /**
  * A DTO for the {@link gov.iti.career.hub.persistence.entities.Attendance} entity
  */
-public record AttendanceResponse(Integer id, Integer studentId, Long appointmentId,
+public record AttendanceResponse(Integer id, Integer studentId, String studentFirstName, String studentLastName, String studentPictureUrl, Long appointmentId,
                                  LocalDate appointmentAppointmentDate, InterviewType appointmentInterviewType,
                                  Integer appointmentRoomId, String appointmentRoomName, Integer appointmentCompanyId,
-                                 String appointmentCompanyCompanyName,
+                                 String appointmentCompanyCompanyName, String appointmentCompanyPictureUrl,
                                  AttendanceStatus attendanceStatus) implements Serializable {
 }

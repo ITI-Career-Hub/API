@@ -114,6 +114,10 @@ public abstract class AppointmentMapper {
     @Mapping(source = "appointmentAppointmentDate", target = "appointment.appointmentDate")
     @Mapping(source = "appointmentId", target = "appointment.id")
     @Mapping(source = "studentId", target = "student.id")
+    @Mapping(source = "studentPictureUrl", target = "student.pictureUrl")
+    @Mapping(source = "studentFirstName", target = "student.firstName")
+    @Mapping(source = "studentLastName", target = "student.lastName")
+    @Mapping(source = "appointmentCompanyPictureUrl", target = "appointment.company.pictureUrl")
     abstract Attendance toAttendanceEntity(AttendanceResponse attendanceResponse);
 
     @InheritInverseConfiguration(name = "toAttendanceEntity")
@@ -132,5 +136,9 @@ public abstract class AppointmentMapper {
 //                .orElseThrow(() ->
 //                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Room Not Found"));
 //    }
+
+    String concatenateFields(String field1, String field2) {
+        return field1 + field2;
+    }
 }
     

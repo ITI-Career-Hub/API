@@ -75,8 +75,8 @@ public class AppointmentService {
     }
 
 
-    public Collection<GetAttendanceResponse> getAppointmentAttendances(Integer id){
-        return appointmentMapper.toDto(
+    public Collection<AttendanceResponse> getAppointmentAttendances(Integer id){
+        return appointmentMapper.toAttendanceResponseDto(
                 appointmentRepository.findById(id).orElseThrow(() ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Appointment Not Found")).getAttendances()
         );
@@ -102,5 +102,9 @@ public class AppointmentService {
         return appointmentMapper.toAttendanceResponseDto(
                 attendanceRepository.findByStudentIdAndAppointmentIsApprovedTrue(id)
         );
+    }
+
+    public void changeAttendanceStatus(Integer id, AttendanceStatus status){
+        attendanceRepository.updateAttendanceStatus(id, status);
     }
 }
