@@ -51,6 +51,11 @@ public class StudentService {
         return studentMapper.collectionToDto(studentRepository.findAll());
     }
 
+    public Collection<GetStudentResponse> getAllStudentsByDepartmentId(Integer departmentId) {
+        return studentMapper.collectionToDto(
+                studentRepository.findAllByDepartmentId(departmentId));
+    }
+
     public UpdateStudentResponse updateStudent(Integer id, UpdateStudentRequest request) {
         Student student = studentRepository.findById(id)
             .orElseThrow( () ->

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListPagingAndSortingRepository;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public interface StudentRepository extends JpaRepository<Student, Integer>,
@@ -19,4 +20,6 @@ public interface StudentRepository extends JpaRepository<Student, Integer>,
     Collection<Student> findAllActiveStudentsByDepartmentId(Integer id);
 
     Optional<Student> findByUsername(String username);
+
+    List<Student> findAllByDepartmentId(Integer departmentId);
 }
