@@ -41,7 +41,7 @@ public class StudentController {
     public ResponseEntity<GetStudentResponse> findStudentById(@PathVariable Integer id){
         return ResponseEntity.ok(studentService.findStudentById(id));
     }
-    @GetMapping("/uasername/{username}")
+    @GetMapping("/username/{username}")
     public ResponseEntity<GetStudentResponse> findStudentByUsername(@PathVariable String username){
         return ResponseEntity.ok(studentService.findStudentByUsername(username));
     }
