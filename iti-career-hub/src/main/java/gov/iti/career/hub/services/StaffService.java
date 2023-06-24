@@ -27,6 +27,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -97,5 +98,10 @@ public class StaffService {
             throw new RuntimeException("Token Already Consumed Exception");
         }
         return mapper.toRegisterStaffRequest(staff);
+    }
+
+    public Collection<GetStaffResponse> getAllStaffByDepartmentId(Integer departmentId) {
+        return staffMapper.collectionToDto(
+                staffRepository.findAllByDepartmentId(departmentId));
     }
 }

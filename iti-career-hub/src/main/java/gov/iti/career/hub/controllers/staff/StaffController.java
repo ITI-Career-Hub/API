@@ -31,6 +31,12 @@ public class StaffController {
                 .ok(staffService.findAllStaff());
     }
 
+    @GetMapping("/department/{id}")
+    public ResponseEntity<Collection<GetStaffResponse>> findAllStaffByDepartment(@PathVariable Integer id){
+        return ResponseEntity
+                .ok(staffService.getAllStaffByDepartmentId(id));
+    }
+
     @GetMapping("{id}")
     public ResponseEntity<GetStaffResponse> findStaffById(@PathVariable Integer id){
         return ResponseEntity
