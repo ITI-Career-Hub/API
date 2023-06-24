@@ -9,7 +9,7 @@ import java.time.LocalDate;
 /**
  * A DTO for the {@link gov.iti.career.hub.persistence.entities.Attendance} entity
  */
-public record AttendanceResponse(Integer id, Integer studentId, String studentFirstName, String studentLastName, String studentPictureUrl, Long appointmentId,
+public record AttendanceResponse(Integer id, Integer studentId, String studentFirstName, String studentLastName, String studentResumeUrl, String studentPictureUrl, Long appointmentId,
                                  LocalDate appointmentAppointmentDate, InterviewType appointmentInterviewType,
                                  Integer appointmentRoomId, String appointmentRoomName, Integer appointmentCompanyId,
                                  String appointmentCompanyCompanyName, String appointmentCompanyPictureUrl,

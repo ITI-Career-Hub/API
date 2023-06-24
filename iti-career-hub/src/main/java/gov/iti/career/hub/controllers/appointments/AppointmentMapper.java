@@ -117,6 +117,7 @@ public abstract class AppointmentMapper {
     @Mapping(source = "studentPictureUrl", target = "student.pictureUrl")
     @Mapping(source = "studentFirstName", target = "student.firstName")
     @Mapping(source = "studentLastName", target = "student.lastName")
+    @Mapping(source = "studentResumeUrl", target = "student.resumeUrl")
     @Mapping(source = "appointmentCompanyPictureUrl", target = "appointment.company.pictureUrl")
     abstract Attendance toAttendanceEntity(AttendanceResponse attendanceResponse);
 
