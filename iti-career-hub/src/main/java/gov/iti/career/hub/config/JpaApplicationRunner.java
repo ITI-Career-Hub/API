@@ -229,7 +229,7 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .interviewType(InterviewType.HR)
                 .department(jets)
                 .company(fawry)
-                .event(event2)
+                .event(event1)
                 .interviewers(new String[]{"Khaled", "Hisham"})
                 .interviewNotes("Khaled is Good")
                 .room(room3)

@@ -5,6 +5,7 @@ import java.util.Collection;
 import gov.iti.career.hub.controllers.appointments.dtos.requests.ActivateAppointmentRequest;
 import gov.iti.career.hub.controllers.appointments.dtos.responses.*;
 import gov.iti.career.hub.controllers.companies.dtos.responses.GetAllAppointmentsByCompanyAndEvent;
+import gov.iti.career.hub.controllers.departments.dtos.responses.GetAppointmentsForDepartmentInEvent;
 import gov.iti.career.hub.persistence.entities.Attendance;
 import gov.iti.career.hub.persistence.repositories.RoomRepository;
 import org.mapstruct.*;
@@ -141,5 +142,11 @@ public abstract class AppointmentMapper {
     String concatenateFields(String field1, String field2) {
         return field1 + field2;
     }
+    @Mapping(source = "company.companyName", target = "companyName")
+    @Mapping(source = "company.id", target = "companyId")
+    @Mapping(source = "room.name", target = "roomName")
+    @Mapping(source = "room.id", target = "roomId")
+    public abstract GetAppointmentsForDepartmentInEvent toGetAppointmentsForDepartmentInEventDto(Appointment appointment);
+    public abstract Collection<GetAppointmentsForDepartmentInEvent> toGetAppointmentsForDepartmentInEventDto(Collection<Appointment> appointments);
 }
     

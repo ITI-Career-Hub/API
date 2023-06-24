@@ -3,12 +3,14 @@ package gov.iti.career.hub.controllers.departments;
 import gov.iti.career.hub.controllers.companies.dtos.responses.GetEventForCompanyResponse;
 import gov.iti.career.hub.controllers.departments.dtos.requests.CreateDepartmentRequest;
 import gov.iti.career.hub.controllers.departments.dtos.requests.UpdateDepartmentRequest;
+import gov.iti.career.hub.controllers.departments.dtos.responses.GetAppointmentsForDepartmentInEvent;
 import gov.iti.career.hub.controllers.departments.dtos.responses.GetDepartmentResponse;
 import gov.iti.career.hub.controllers.departments.dtos.responses.GetEventForDepartmentResponse;
 import gov.iti.career.hub.controllers.departments.dtos.responses.UpdateDepartmentResponse;
 import gov.iti.career.hub.controllers.students.dtos.responses.GetAllStudentsInDepartmentResponse;
 import gov.iti.career.hub.persistence.entities.enums.Discipline;
 import gov.iti.career.hub.persistence.repositories.StaffRepository;
+import gov.iti.career.hub.services.AppointmentService;
 import gov.iti.career.hub.services.DepartmentService;
 import gov.iti.career.hub.services.EventService;
 import gov.iti.career.hub.services.StudentService;
@@ -27,6 +29,7 @@ public class DepartmentController {
     private final DepartmentService departmentService;
     private final StudentService studentService;
     private final EventService eventService;
+    private final AppointmentService appointmentService;
 
     @GetMapping
     public ResponseEntity<Collection<GetDepartmentResponse>> getAllDepartments(@RequestParam(value = "discipline", required = false) Discipline discipline) {
@@ -69,5 +72,11 @@ public class DepartmentController {
     @GetMapping("{departmentId}/event")
     public ResponseEntity<Collection<GetEventForDepartmentResponse>> getEventsForCompany(@PathVariable Integer departmentId){
         return ResponseEntity.ok(eventService.getEventsForDepartment(departmentId));
+    }
+
+    @GetMapping("{departmentId}/event/{eventId}/appointment")
+    public ResponseEntity<Collection<GetAppointmentsForDepartmentInEvent>> getAppointmentsForDepartmentInEvent(@PathVariable Integer departmentId,
+                                                                                                               @PathVariable Integer eventId){
+        return ResponseEntity.ok(appointmentService.getAppointmentsForDepartmentInEvent(departmentId, eventId));
     }
 }

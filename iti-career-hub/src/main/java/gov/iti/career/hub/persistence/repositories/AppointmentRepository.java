@@ -23,4 +23,11 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
             AND a.company.id = :companyId
         """)
     Collection<Appointment> getAllAppointmentsByCompanyAndEvent(Integer companyId, Integer eventId);
+
+    @Query("""
+            SELECT a FROM Appointment a
+            WHERE a.department.id = :departmentId
+            AND a.event.id = :eventId
+            """)
+    Collection<Appointment> findAppointmentForDepartmentInEvent(Integer departmentId, Integer eventId);
 }

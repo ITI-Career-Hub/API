@@ -5,6 +5,7 @@ import java.util.*;
 import gov.iti.career.hub.controllers.appointments.dtos.requests.ActivateAppointmentRequest;
 import gov.iti.career.hub.controllers.appointments.dtos.responses.*;
 import gov.iti.career.hub.controllers.companies.dtos.responses.GetAllAppointmentsByCompanyAndEvent;
+import gov.iti.career.hub.controllers.departments.dtos.responses.GetAppointmentsForDepartmentInEvent;
 import gov.iti.career.hub.persistence.entities.Attendance;
 import gov.iti.career.hub.persistence.entities.enums.AttendanceStatus;
 import gov.iti.career.hub.persistence.repositories.AttendanceRepository;
@@ -106,5 +107,11 @@ public class AppointmentService {
 
     public void changeAttendanceStatus(Integer id, AttendanceStatus status){
         attendanceRepository.updateAttendanceStatus(id, status);
+    }
+
+    public Collection<GetAppointmentsForDepartmentInEvent> getAppointmentsForDepartmentInEvent(Integer departmentId, Integer eventId) {
+        return appointmentMapper.toGetAppointmentsForDepartmentInEventDto(
+                appointmentRepository.findAppointmentForDepartmentInEvent(departmentId, eventId)
+        );
     }
 }
