@@ -1,5 +1,6 @@
 package gov.iti.career.hub.services;
 
+import gov.iti.career.hub.controllers.companies.dtos.responses.GetEventForCompanyResponse;
 import gov.iti.career.hub.controllers.events.EventMapper;
 import gov.iti.career.hub.controllers.events.dtos.requests.AddEventRequest;
 import gov.iti.career.hub.controllers.events.dtos.requests.UpdateEventRequest;
@@ -52,5 +53,9 @@ public class EventService {
                 );
         mapper.partialUpdate(request, event);
         return mapper.toUpdateEventResponseDto(eventRepository.save(event));
+    }
+
+    public Collection<GetEventForCompanyResponse> getEventsForCompany(Integer companyId) {
+        return mapper.toGetEventForCompanyResponseDto(eventRepository.getEventsForCompany(companyId));
     }
 }

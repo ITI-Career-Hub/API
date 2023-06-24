@@ -7,10 +7,13 @@ import gov.iti.career.hub.controllers.companies.dtos.requests.UpdateCompanyReque
 import gov.iti.career.hub.controllers.companies.dtos.requests.UpdateCompanyResponse;
 import gov.iti.career.hub.controllers.companies.dtos.responses.GetAllAppointmentsByCompanyAndEvent;
 import gov.iti.career.hub.controllers.companies.dtos.responses.GetCompanyResponse;
+import gov.iti.career.hub.controllers.companies.dtos.responses.GetEventForCompanyResponse;
 import gov.iti.career.hub.controllers.register.dtos.requests.RegisterCompanyRequest;
 import gov.iti.career.hub.controllers.register.dtos.requests.RegisterStudentRequest;
+import gov.iti.career.hub.persistence.repositories.EventRepository;
 import gov.iti.career.hub.services.AppointmentService;
 import gov.iti.career.hub.services.CompanyService;
+import gov.iti.career.hub.services.EventService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.jose4j.jwt.MalformedClaimException;
@@ -27,6 +30,7 @@ public class CompanyController {
 
     private final CompanyService companyService;
     private final AppointmentService appointmentService;
+    private final EventService eventService;
 
     @GetMapping
     public ResponseEntity<Collection<GetCompanyResponse>> findAllCompanies(){
@@ -66,5 +70,9 @@ public class CompanyController {
     public ResponseEntity<Collection<GetAllAppointmentsByCompanyAndEvent>> getAllAppointmentsByCompanyAndEvent(@PathVariable Integer companyId,
                                                                                                    @PathVariable Integer eventId ){
         return ResponseEntity.ok(appointmentService.getAllAppointmentsByCompanyAndEvent(companyId, eventId));
+    }
+    @GetMapping("/{companyId}/event")
+    public ResponseEntity<Collection<GetEventForCompanyResponse>> getEventsForCompany(@PathVariable Integer companyId){
+        return ResponseEntity.ok(eventService.getEventsForCompany(companyId));
     }
 }

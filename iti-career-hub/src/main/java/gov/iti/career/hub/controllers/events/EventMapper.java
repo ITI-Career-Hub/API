@@ -1,5 +1,6 @@
 package gov.iti.career.hub.controllers.events;
 
+import gov.iti.career.hub.controllers.companies.dtos.responses.GetEventForCompanyResponse;
 import gov.iti.career.hub.controllers.events.dtos.requests.AddEventRequest;
 import gov.iti.career.hub.controllers.events.dtos.requests.UpdateEventRequest;
 import gov.iti.career.hub.controllers.events.dtos.responses.AddEventResponse;
@@ -25,4 +26,5 @@ public interface EventMapper {
     Event partialUpdate(UpdateEventRequest updateEventRequest, @MappingTarget Event event);
 
     UpdateEventResponse toUpdateEventResponseDto(Event event);
+    Collection<GetEventForCompanyResponse> toGetEventForCompanyResponseDto(Collection<Event> events);
 }

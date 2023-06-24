@@ -2,6 +2,7 @@ package gov.iti.career.hub.config;
 
 import gov.iti.career.hub.persistence.entities.*;
 import gov.iti.career.hub.persistence.entities.enums.Discipline;
+import gov.iti.career.hub.persistence.entities.enums.InterviewType;
 import gov.iti.career.hub.persistence.entities.enums.RoleName;
 import gov.iti.career.hub.persistence.repositories.*;
 import jakarta.transaction.Transactional;
@@ -21,6 +22,7 @@ public class JpaApplicationRunner implements ApplicationRunner {
     private final DepartmentRepository departmentRepository;
     private final EventRepository eventRepository;
     private final RoomRepository roomRepository;
+    private final AppointmentRepository appointmentRepository;
 
     @Override
     @Transactional
@@ -113,8 +115,18 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .isActive(true)
                 .build();
 
-        Event event = Event.builder()
+        Event event1 = Event.builder()
                 .eventName("Fair43")
+                .startDate(LocalDate.now().minusDays(3))
+                .endDate(LocalDate.now())
+                .city("Cairo")
+                .state("Cairo")
+                .country("Egypt")
+                .street("Haram")
+                .build();
+
+        Event event2 = Event.builder()
+                .eventName("Fair42")
                 .startDate(LocalDate.now().minusDays(3))
                 .endDate(LocalDate.now())
                 .city("Cairo")
@@ -136,6 +148,83 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .name("1032")
                 .build();
 
+
+        Company fawry = Company.builder()
+                .companyName("Fawry")
+                .username("Fawry Payment Services")
+                .password("password")
+                .email("fawry@gmail.com")
+                .role(companyRole)
+                .pictureUrl("fawry.png")
+                .city("Giza")
+                .country("Egypt")
+                .state("Sheikh Zayed")
+                .street("Street 100")
+                .description("Fawry Description")
+                .technologies(new String[]{"JPA", "Springboot Framework"})
+                .isActive(true)
+                .build();
+
+        Company vois = Company.builder()
+                .companyName("_VOIS")
+                .username("VOIS")
+                .password("password")
+                .email("vois@gmail.com")
+                .role(companyRole)
+                .pictureUrl("vois.png")
+                .city("Giza")
+                .country("Egypt")
+                .state("Sheikh Zayed")
+                .street("Street 100")
+                .description("VOIS Description")
+                .technologies(new String[]{"JPA", "Springboot Framework"})
+                .isActive(true)
+                .build();
+
+        Company orange = Company.builder()
+                .companyName("Orange")
+                .username("Orange Innov")
+                .password("password")
+                .email("orange@gmail.com")
+                .role(companyRole)
+                .pictureUrl("orange.png")
+                .city("Giza")
+                .country("Egypt")
+                .state("Sheikh Zayed")
+                .street("Street 100")
+                .description("Orange Description")
+                .technologies(new String[]{"JPA", "Springboot Framework"})
+                .isActive(true)
+                .build();
+
+        Appointment orangeAppointment1 = Appointment.builder()
+            .appointmentName("orange_appointment_jets43")
+            .appointmentDate(LocalDate.now())
+            .interviewType(InterviewType.HR)
+            .department(jets)
+            .company(orange)
+            .event(event1)
+            .interviewers(new String[]{"Khaled", "Hisham"})
+            .interviewNotes("Khaled is Good")
+            .room(room3)
+            .isApproved(true)
+            .build();
+
+        Appointment orangeAppointment2 = Appointment.builder()
+                .appointmentName("orange_appointment_jets42")
+                .appointmentDate(LocalDate.now())
+                .interviewType(InterviewType.TECHNICAL)
+                .department(mobile)
+                .company(orange)
+                .event(event2)
+                .interviewers(new String[]{"Khaled", "Hisham"})
+                .interviewNotes("Khaled is Good")
+                .room(room2)
+                .isApproved(true)
+                .build();
+
+
+
         roomRepository.save(room1);
         roomRepository.save(room2);
         roomRepository.save(room3);
@@ -154,6 +243,14 @@ public class JpaApplicationRunner implements ApplicationRunner {
         userRepository.save(company);
         userRepository.save(khaleds);
 
-        eventRepository.save(event);
+        userRepository.save(fawry);
+        userRepository.save(orange);
+        userRepository.save(vois);
+
+        eventRepository.save(event1);
+        eventRepository.save(event2);
+
+        appointmentRepository.save(orangeAppointment1);
+        appointmentRepository.save(orangeAppointment2);
     }
 }
