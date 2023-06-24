@@ -1,6 +1,7 @@
 package gov.iti.career.hub.services;
 
 import gov.iti.career.hub.controllers.companies.dtos.responses.GetEventForCompanyResponse;
+import gov.iti.career.hub.controllers.departments.dtos.responses.GetEventForDepartmentResponse;
 import gov.iti.career.hub.controllers.events.EventMapper;
 import gov.iti.career.hub.controllers.events.dtos.requests.AddEventRequest;
 import gov.iti.career.hub.controllers.events.dtos.requests.UpdateEventRequest;
@@ -8,7 +9,6 @@ import gov.iti.career.hub.controllers.events.dtos.responses.AddEventResponse;
 import gov.iti.career.hub.controllers.events.dtos.responses.GetEventResponse;
 import gov.iti.career.hub.controllers.events.dtos.responses.UpdateEventResponse;
 import gov.iti.career.hub.persistence.entities.Event;
-import gov.iti.career.hub.persistence.entities.Student;
 import gov.iti.career.hub.persistence.repositories.EventRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -57,5 +57,9 @@ public class EventService {
 
     public Collection<GetEventForCompanyResponse> getEventsForCompany(Integer companyId) {
         return mapper.toGetEventForCompanyResponseDto(eventRepository.getEventsForCompany(companyId));
+    }
+
+    public Collection<GetEventForDepartmentResponse> getEventsForDepartment(Integer companyId) {
+        return mapper.toGetEventForDepartmentResponseDto(eventRepository.getEventsForDepartment(companyId));
     }
 }

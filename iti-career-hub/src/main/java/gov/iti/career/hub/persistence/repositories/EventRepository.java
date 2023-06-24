@@ -17,4 +17,12 @@ public interface EventRepository extends JpaRepository<Event, Integer>
             WHERE a.company.id = :companyId
         """)
     Collection<Event> getEventsForCompany(Integer companyId);
+
+    @Query("""
+            SELECT e FROM Appointment a
+            JOIN Event e
+            ON e.id = a.event.id
+            WHERE a.department.id = :departmentId
+        """)
+    Collection<Event> getEventsForDepartment(Integer departmentId);
 }

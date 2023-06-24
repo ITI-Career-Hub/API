@@ -223,7 +223,31 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .isApproved(true)
                 .build();
 
+        Appointment fawryAppointment1 = Appointment.builder()
+                .appointmentName("fawry_appointment_jets43")
+                .appointmentDate(LocalDate.of(1996, 10, 12))
+                .interviewType(InterviewType.HR)
+                .department(jets)
+                .company(fawry)
+                .event(event2)
+                .interviewers(new String[]{"Khaled", "Hisham"})
+                .interviewNotes("Khaled is Good")
+                .room(room3)
+                .isApproved(true)
+                .build();
 
+        Appointment voisAppointment1 = Appointment.builder()
+                .appointmentName("vois_appointment_jets43")
+                .appointmentDate(LocalDate.of(1996, 10, 17))
+                .interviewType(InterviewType.HR)
+                .department(mobile)
+                .company(vois)
+                .event(event1)
+                .interviewers(new String[]{"Khaled", "Hisham"})
+                .interviewNotes("Khaled is Good")
+                .room(room3)
+                .isApproved(true)
+                .build();
 
         roomRepository.save(room1);
         roomRepository.save(room2);
@@ -252,5 +276,7 @@ public class JpaApplicationRunner implements ApplicationRunner {
 
         appointmentRepository.save(orangeAppointment1);
         appointmentRepository.save(orangeAppointment2);
+        appointmentRepository.save(fawryAppointment1);
+        appointmentRepository.save(voisAppointment1);
     }
 }
