@@ -83,7 +83,7 @@ public class JpaApplicationRunner implements ApplicationRunner {
 
         Staff staff = Staff.builder()
                 .username("Ziad")
-                .email("zyad.yasser@gmail.com")
+                .email("zyad.yasser1@gmail.com")
                 .password("password")
                 .role(staffRole)
                 .pictureUrl("https://i.imgur.com/Ig8XBfh.jpg")
@@ -158,7 +158,7 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .build();
 
         Student zoz = Student.builder()
-                .username("Ziad")
+                .username("Ziad Yasser")
                 .password("password")
                 .email("ZyadYasser@gmail.com")
                 .college("universitys")
