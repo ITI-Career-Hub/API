@@ -71,4 +71,10 @@ public class AppointmentController {
         appointmentService.changeAttendanceStatus(id, newStatus);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/event/{eventId}/company/{companyId}")
+    public ResponseEntity<Collection<GetAppointmentResponse>> getAppointmentsOfCompanyInEvent(@PathVariable Integer eventId, @PathVariable Integer companyId){
+        return ResponseEntity.ok(
+                appointmentService.getAppointmentsForCompanyAndEvent(companyId, eventId));
+    }
 }

@@ -1,6 +1,7 @@
 package gov.iti.career.hub.config;
 
 import gov.iti.career.hub.persistence.entities.*;
+import gov.iti.career.hub.persistence.entities.enums.AttendanceStatus;
 import gov.iti.career.hub.persistence.entities.enums.Discipline;
 import gov.iti.career.hub.persistence.entities.enums.InterviewType;
 import gov.iti.career.hub.persistence.entities.enums.RoleName;
@@ -23,6 +24,7 @@ public class JpaApplicationRunner implements ApplicationRunner {
     private final EventRepository eventRepository;
     private final RoomRepository roomRepository;
     private final AppointmentRepository appointmentRepository;
+    private final AttendanceRepository attendanceRepository;
 
     @Override
     @Transactional
@@ -55,11 +57,11 @@ public class JpaApplicationRunner implements ApplicationRunner {
 
         Company company = Company.builder()
                 .companyName("khaled's company")
-                .username("khaleds")
+                .username("khaleds1")
                 .password("password")
                 .email("company@gmail.com")
                 .role(companyRole)
-                .pictureUrl("company.png")
+                .pictureUrl("https://firebasestorage.googleapis.com/v0/b/fir-645ac.appspot.com/o/man.png?alt=media&token=89220f00-f291-4dd2-9f0c-48a172bba6c4")
                 .city("Giza")
                 .country("Egypt")
                 .state("Sheikh Zayed")
@@ -70,11 +72,36 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .build();
 
         Staff staff = Staff.builder()
-                .username("zyad yasser")
+                .username("ziad")
                 .email("zyad.yasser@gmaiill.com")
                 .password("password")
                 .role(staffRole)
-                .pictureUrl("staff.png")
+                .pictureUrl("https://firebasestorage.googleapis.com/v0/b/fir-645ac.appspot.com/o/man.png?alt=media&token=89220f00-f291-4dd2-9f0c-48a172bba6c4")
+                .firstName("zyad")
+                .lastName("yasser")
+                .department(jets)
+                .isActive(true)
+                .build();
+
+
+        Staff admin = Staff.builder()
+                .username("admin")
+                .email("zyad.yasser@gmaiill.com")
+                .password("admin")
+                .role(adminRole)
+                .pictureUrl("https://firebasestorage.googleapis.com/v0/b/fir-645ac.appspot.com/o/man.png?alt=media&token=89220f00-f291-4dd2-9f0c-48a172bba6c4")
+                .firstName("zyad")
+                .lastName("yasser")
+                .department(jets)
+                .isActive(true)
+                .build();
+
+        Staff stff = Staff.builder()
+                .username("stff")
+                .email("zyad.yasser@gmaiill.com")
+                .password("password")
+                .role(adminRole)
+                .pictureUrl("https://firebasestorage.googleapis.com/v0/b/fir-645ac.appspot.com/o/man.png?alt=media&token=89220f00-f291-4dd2-9f0c-48a172bba6c4")
                 .firstName("zyad")
                 .lastName("yasser")
                 .department(jets)
@@ -89,7 +116,7 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .graduationYear((short) 2020)
                 .intakeNumber((short) 43)
                 .phoneNumber("01030503240")
-                .pictureUrl("student.png")
+                .pictureUrl("https://firebasestorage.googleapis.com/v0/b/fir-645ac.appspot.com/o/man.png?alt=media&token=89220f00-f291-4dd2-9f0c-48a172bba6c4")
                 .resumeUrl("resumeURLLLLLLLLLL")
                 .role(studentRole)
                 .department(jets)
@@ -106,8 +133,8 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .graduationYear((short) 2020)
                 .intakeNumber((short) 43)
                 .phoneNumber("01030503240")
-                .pictureUrl("students.png")
-                .resumeUrl("resumeURLLLLLLLLLLs")
+                .pictureUrl("https://firebasestorage.googleapis.com/v0/b/fir-645ac.appspot.com/o/man.png?alt=media&token=89220f00-f291-4dd2-9f0c-48a172bba6c4")
+                .resumeUrl("https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf")
                 .role(studentRole)
                 .department(jets)
                 .firstName("khaleds")
@@ -249,6 +276,18 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .isApproved(true)
                 .build();
 
+        Attendance attendance = Attendance.builder()
+                        .attendanceStatus(AttendanceStatus.PENDING)
+                        .student(student)
+                                .appointment(orangeAppointment1)
+                                        .build();
+
+        Attendance attendance2 = Attendance.builder()
+                .attendanceStatus(AttendanceStatus.COMPLETED)
+                .student(student)
+                .appointment(orangeAppointment2)
+                .build();
+
         roomRepository.save(room1);
         roomRepository.save(room2);
         roomRepository.save(room3);
@@ -266,6 +305,8 @@ public class JpaApplicationRunner implements ApplicationRunner {
         userRepository.save(staff);
         userRepository.save(company);
         userRepository.save(khaleds);
+        userRepository.save(admin);
+//        userRepository.save(stff);
 
         userRepository.save(fawry);
         userRepository.save(orange);
@@ -278,5 +319,8 @@ public class JpaApplicationRunner implements ApplicationRunner {
         appointmentRepository.save(orangeAppointment2);
         appointmentRepository.save(fawryAppointment1);
         appointmentRepository.save(voisAppointment1);
+
+        attendanceRepository.save(attendance);
+        attendanceRepository.save(attendance2);
     }
 }
