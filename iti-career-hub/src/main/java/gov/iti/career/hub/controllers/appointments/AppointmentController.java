@@ -77,4 +77,10 @@ public class AppointmentController {
         return ResponseEntity.ok(
                 appointmentService.getAppointmentsForCompanyAndEvent(companyId, eventId));
     }
+
+    @GetMapping("/event/{eventId}")
+    public ResponseEntity<Collection<GetAppointmentResponse>> getAppointmentsOfEvent(@PathVariable Integer eventId){
+        return ResponseEntity.ok(
+                appointmentService.getAppointmentsForEvent(eventId));
+    }
 }

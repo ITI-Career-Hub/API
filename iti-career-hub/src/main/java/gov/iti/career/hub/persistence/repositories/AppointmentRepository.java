@@ -32,4 +32,6 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
     Collection<Appointment> findAppointmentForDepartmentInEvent(Integer departmentId, Integer eventId);
 
     Collection<Appointment> findByCompanyIdAndEventId(Integer companyId, Integer eventId);
+
+    Collection<Appointment> findByEventId(Integer eventId);
 }

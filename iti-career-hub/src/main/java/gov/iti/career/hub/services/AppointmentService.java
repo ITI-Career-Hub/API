@@ -120,4 +120,10 @@ public class AppointmentService {
                 appointmentRepository.findByCompanyIdAndEventId(companyId, eventId)
         );
     }
+
+    public Collection<GetAppointmentResponse> getAppointmentsForEvent(Integer eventId) {
+        return appointmentMapper.toGetAllAppointmentsResponseDto(
+                appointmentRepository.findByEventId( eventId)
+        );
+    }
 }
