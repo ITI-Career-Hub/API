@@ -50,18 +50,28 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .discipline(Discipline.SOFTWARE_ENGINEERING_AND_DEVELOPMENT)
                 .build();
 
-        Department mobile = Department.builder()
-                .departmentName("MOBILE")
+        Department sd = Department.builder()
+                .departmentName("Software Development")
                 .discipline(Discipline.SOFTWARE_ENGINEERING_AND_DEVELOPMENT)
                 .build();
 
+        Department mobile = Department.builder()
+                .departmentName("Cyber Security")
+                .discipline(Discipline.INFRASTRUCTURE_NETWORK_AND_SECURITY_SERVICES)
+                .build();
+
+        Department ui = Department.builder()
+                .departmentName("UI")
+                .discipline(Discipline.CONTENT_DEVELOPMENT)
+                .build();
+
         Company company = Company.builder()
-                .companyName("khaled's company")
-                .username("khaleds1")
+                .companyName("Aman")
+                .username("Aman")
                 .password("password")
-                .email("company@gmail.com")
+                .email("aman@gmail.com")
                 .role(companyRole)
-                .pictureUrl("https://firebasestorage.googleapis.com/v0/b/fir-645ac.appspot.com/o/man.png?alt=media&token=89220f00-f291-4dd2-9f0c-48a172bba6c4")
+                .pictureUrl("https://www.hotlinesegypt.com/wp-content/uploads/2019/05/AMAN-E-Payments-19910-372x400.jpg")
                 .city("Giza")
                 .country("Egypt")
                 .state("Sheikh Zayed")
@@ -72,78 +82,100 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .build();
 
         Staff staff = Staff.builder()
-                .username("ziad")
-                .email("zyad.yasser@gmaiill.com")
+                .username("Ziad")
+                .email("zyad.yasser@gmail.com")
                 .password("password")
                 .role(staffRole)
-                .pictureUrl("https://firebasestorage.googleapis.com/v0/b/fir-645ac.appspot.com/o/man.png?alt=media&token=89220f00-f291-4dd2-9f0c-48a172bba6c4")
-                .firstName("zyad")
-                .lastName("yasser")
+                .pictureUrl("https://i.imgur.com/Ig8XBfh.jpg")
+                .firstName("Ziad")
+                .lastName("Yasser")
                 .department(jets)
                 .isActive(true)
                 .build();
 
 
         Staff admin = Staff.builder()
-                .username("admin")
-                .email("zyad.yasser@gmaiill.com")
+                .username("Admin")
+                .email("zyad.yasser@gmail.com")
                 .password("admin")
                 .role(adminRole)
-                .pictureUrl("https://firebasestorage.googleapis.com/v0/b/fir-645ac.appspot.com/o/man.png?alt=media&token=89220f00-f291-4dd2-9f0c-48a172bba6c4")
-                .firstName("zyad")
-                .lastName("yasser")
-                .department(jets)
-                .isActive(true)
-                .build();
-
-        Staff stff = Staff.builder()
-                .username("stff")
-                .email("zyad.yasser@gmaiill.com")
-                .password("password")
-                .role(adminRole)
-                .pictureUrl("https://firebasestorage.googleapis.com/v0/b/fir-645ac.appspot.com/o/man.png?alt=media&token=89220f00-f291-4dd2-9f0c-48a172bba6c4")
-                .firstName("zyad")
-                .lastName("yasser")
+                .pictureUrl("https://www.pngmart.com/files/21/Admin-Profile-PNG-Clipart.png")
+                .firstName("Career Hub")
+                .lastName("Admin")
                 .department(jets)
                 .isActive(true)
                 .build();
 
         Student student = Student.builder()
-                .username("khaled")
+                .username("Khaled")
                 .password("password")
                 .email("khaled.m.hisham@gmail.com")
                 .college("university")
                 .graduationYear((short) 2020)
                 .intakeNumber((short) 43)
                 .phoneNumber("01030503240")
-                .pictureUrl("https://firebasestorage.googleapis.com/v0/b/fir-645ac.appspot.com/o/man.png?alt=media&token=89220f00-f291-4dd2-9f0c-48a172bba6c4")
-                .resumeUrl("resumeURLLLLLLLLLL")
+                .pictureUrl("https://i.imgur.com/q9gA9eM.jpg")
+                .resumeUrl("https://fuchsia-meghann-34.tiiny.site/Ziad_Yasser_CV_Java-2023-06-25T12-01-37.776Z.pdf")
                 .role(studentRole)
                 .department(jets)
-                .firstName("khaled")
-                .lastName("hisham")
+                .firstName("Khaled")
+                .lastName("Hisham")
                 .isActive(true)
                 .build();
 
-        Student khaleds = Student.builder()
-                .username("khaleds")
+        Student kotb = Student.builder()
+                .username("Kotb")
                 .password("password")
                 .email("khaled.m.hishams@gmail.com")
                 .college("universitys")
                 .graduationYear((short) 2020)
                 .intakeNumber((short) 43)
                 .phoneNumber("01030503240")
-                .pictureUrl("https://firebasestorage.googleapis.com/v0/b/fir-645ac.appspot.com/o/man.png?alt=media&token=89220f00-f291-4dd2-9f0c-48a172bba6c4")
-                .resumeUrl("https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf")
+                .pictureUrl("https://i.imgur.com/dzsh45H.jpg")
+                .resumeUrl("https://fuchsia-meghann-34.tiiny.site/Ziad_Yasser_CV_Java-2023-06-25T12-01-37.776Z.pdf")
                 .role(studentRole)
                 .department(jets)
-                .firstName("khaleds")
-                .lastName("hishams")
+                .firstName("Abdelrahman")
+                .lastName("Kotb")
+                .isActive(true)
+                .build();
+
+        Student sherbini = Student.builder()
+                .username("Sherbini")
+                .password("password")
+                .email("AhmedMohamed@gmail.com")
+                .college("universitys")
+                .graduationYear((short) 2020)
+                .intakeNumber((short) 43)
+                .phoneNumber("01030503240")
+                .pictureUrl("https://i.imgur.com/OIZkVUQ.jpg")
+                .resumeUrl("https://fuchsia-meghann-34.tiiny.site/Ziad_Yasser_CV_Java-2023-06-25T12-01-37.776Z.pdf")
+                .role(studentRole)
+                .department(jets)
+                .firstName("Ahmed")
+                .lastName("Sherbini")
+                .isActive(true)
+                .build();
+
+        Student zoz = Student.builder()
+                .username("Ziad")
+                .password("password")
+                .email("ZyadYasser@gmail.com")
+                .college("universitys")
+                .graduationYear((short) 2020)
+                .intakeNumber((short) 43)
+                .phoneNumber("01030503240")
+                .pictureUrl("https://i.imgur.com/Ig8XBfh.jpg")
+                .resumeUrl("https://fuchsia-meghann-34.tiiny.site/Ziad_Yasser_CV_Java-2023-06-25T12-01-37.776Z.pdf")
+                .role(studentRole)
+                .department(jets)
+                .firstName("Ziad")
+                .lastName("Yasser")
                 .isActive(true)
                 .build();
 
         Event event1 = Event.builder()
-                .eventName("Fair43")
+                .eventName("Job Fair 43")
                 .startDate(LocalDate.now().minusDays(3))
                 .endDate(LocalDate.now())
                 .city("Cairo")
@@ -153,7 +185,7 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .build();
 
         Event event2 = Event.builder()
-                .eventName("Fair42")
+                .eventName("Job Fair 42")
                 .startDate(LocalDate.now().minusDays(3))
                 .endDate(LocalDate.now())
                 .city("Cairo")
@@ -177,12 +209,12 @@ public class JpaApplicationRunner implements ApplicationRunner {
 
 
         Company fawry = Company.builder()
-                .companyName("Fawry")
-                .username("Fawry Payment Services")
+                .companyName("Fawry Payment Services")
+                .username("Fawry")
                 .password("password")
                 .email("fawry@gmail.com")
                 .role(companyRole)
-                .pictureUrl("fawry.png")
+                .pictureUrl("https://www.fawry.com/wp-content/uploads/2022/08/Myfawry-Vertical-01-233x300.png")
                 .city("Giza")
                 .country("Egypt")
                 .state("Sheikh Zayed")
@@ -198,7 +230,7 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .password("password")
                 .email("vois@gmail.com")
                 .role(companyRole)
-                .pictureUrl("vois.png")
+                .pictureUrl("https://www.vodafone.com/sites/default/files/2021-06/_VOIS.JPG")
                 .city("Giza")
                 .country("Egypt")
                 .state("Sheikh Zayed")
@@ -210,11 +242,11 @@ public class JpaApplicationRunner implements ApplicationRunner {
 
         Company orange = Company.builder()
                 .companyName("Orange")
-                .username("Orange Innov")
+                .username("Orange")
                 .password("password")
                 .email("orange@gmail.com")
                 .role(companyRole)
-                .pictureUrl("orange.png")
+                .pictureUrl("https://download.logo.wine/logo/Orange_Egypt/Orange_Egypt-Logo.wine.png")
                 .city("Giza")
                 .country("Egypt")
                 .state("Sheikh Zayed")
@@ -225,7 +257,7 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .build();
 
         Appointment orangeAppointment1 = Appointment.builder()
-            .appointmentName("orange_appointment_jets43")
+            .appointmentName("Orange Java Interview")
             .appointmentDate(LocalDate.now())
             .interviewType(InterviewType.HR)
             .department(jets)
@@ -237,8 +269,34 @@ public class JpaApplicationRunner implements ApplicationRunner {
             .isApproved(true)
             .build();
 
+        Appointment orangeAppointment3 = Appointment.builder()
+                .appointmentName("Orange Cyber Interview")
+                .appointmentDate(LocalDate.now())
+                .interviewType(InterviewType.HR)
+                .department(mobile)
+                .company(orange)
+                .event(event1)
+                .interviewers(new String[]{"Khaled", "Hisham"})
+                .interviewNotes("Khaled is Good")
+                .room(room4)
+                .isApproved(true)
+                .build();
+
+        Appointment orangeAppointment4 = Appointment.builder()
+                .appointmentName("Orange UI Interview")
+                .appointmentDate(LocalDate.now().minusDays(10))
+                .interviewType(InterviewType.HR)
+                .department(ui)
+                .company(orange)
+                .event(event1)
+                .interviewers(new String[]{"Khaled", "Hisham"})
+                .interviewNotes("Khaled is Good")
+                .room(room4)
+                .isApproved(true)
+                .build();
+
         Appointment orangeAppointment2 = Appointment.builder()
-                .appointmentName("orange_appointment_jets42")
+                .appointmentName("Orange Cyber Interview")
                 .appointmentDate(LocalDate.now())
                 .interviewType(InterviewType.TECHNICAL)
                 .department(mobile)
@@ -251,7 +309,7 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .build();
 
         Appointment fawryAppointment1 = Appointment.builder()
-                .appointmentName("fawry_appointment_jets43")
+                .appointmentName("Fawry Java Interview")
                 .appointmentDate(LocalDate.of(1996, 10, 12))
                 .interviewType(InterviewType.HR)
                 .department(jets)
@@ -264,8 +322,8 @@ public class JpaApplicationRunner implements ApplicationRunner {
                 .build();
 
         Appointment voisAppointment1 = Appointment.builder()
-                .appointmentName("vois_appointment_jets43")
-                .appointmentDate(LocalDate.of(1996, 10, 17))
+                .appointmentName("Vois Cyber Security Interview")
+                .appointmentDate(LocalDate.now().minusDays(11))
                 .interviewType(InterviewType.HR)
                 .department(mobile)
                 .company(vois)
@@ -282,10 +340,40 @@ public class JpaApplicationRunner implements ApplicationRunner {
                                 .appointment(orangeAppointment1)
                                         .build();
 
+        Attendance attendance1 = Attendance.builder()
+                .attendanceStatus(AttendanceStatus.COMPLETED)
+                .student(kotb)
+                .appointment(orangeAppointment1)
+                .build();
+
+        Attendance attendance5 = Attendance.builder()
+                .attendanceStatus(AttendanceStatus.PENDING)
+                .student(sherbini)
+                .appointment(orangeAppointment1)
+                .build();
+
+        Attendance attendance6 = Attendance.builder()
+                .attendanceStatus(AttendanceStatus.PENDING)
+                .student(zoz)
+                .appointment(orangeAppointment1)
+                .build();
+
         Attendance attendance2 = Attendance.builder()
                 .attendanceStatus(AttendanceStatus.COMPLETED)
                 .student(student)
                 .appointment(orangeAppointment2)
+                .build();
+
+        Attendance attendance3 = Attendance.builder()
+                .attendanceStatus(AttendanceStatus.PENDING)
+                .student(student)
+                .appointment(fawryAppointment1)
+                .build();
+
+        Attendance attendance4 = Attendance.builder()
+                .attendanceStatus(AttendanceStatus.COMPLETED)
+                .student(student)
+                .appointment(voisAppointment1)
                 .build();
 
         roomRepository.save(room1);
@@ -294,6 +382,8 @@ public class JpaApplicationRunner implements ApplicationRunner {
         roomRepository.save(room4);
 
         departmentRepository.save(jets);
+        departmentRepository.save(sd);
+        departmentRepository.save(ui);
         departmentRepository.save(mobile);
 
         roleRepository.save(adminRole);
@@ -304,23 +394,33 @@ public class JpaApplicationRunner implements ApplicationRunner {
         userRepository.save(student);
         userRepository.save(staff);
         userRepository.save(company);
-        userRepository.save(khaleds);
+        userRepository.save(kotb);
+        userRepository.save(sherbini);
+        userRepository.save(zoz);
         userRepository.save(admin);
-//        userRepository.save(stff);
 
         userRepository.save(fawry);
         userRepository.save(orange);
         userRepository.save(vois);
+        userRepository.save(vois);
+
 
         eventRepository.save(event1);
         eventRepository.save(event2);
 
         appointmentRepository.save(orangeAppointment1);
         appointmentRepository.save(orangeAppointment2);
+        appointmentRepository.save(orangeAppointment3);
+        appointmentRepository.save(orangeAppointment4);
         appointmentRepository.save(fawryAppointment1);
         appointmentRepository.save(voisAppointment1);
 
         attendanceRepository.save(attendance);
         attendanceRepository.save(attendance2);
+        attendanceRepository.save((attendance3));
+        attendanceRepository.save((attendance4));
+        attendanceRepository.save((attendance1));
+        attendanceRepository.save((attendance5));
+        attendanceRepository.save((attendance6));
     }
 }
