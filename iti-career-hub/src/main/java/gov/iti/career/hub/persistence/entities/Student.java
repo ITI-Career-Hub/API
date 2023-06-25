@@ -19,8 +19,7 @@ public class Student extends User{
     @Builder
     public Student(Integer id, String username, String password, String email, String pictureUrl, Role role,
                    Boolean isActive, String firstName, String lastName, String college, String phoneNumber,
-                   Short intakeNumber, Short graduationYear, String resumeUrl, Department department,
-                   Set<Attendance> attendances) {
+                   Short intakeNumber, Short graduationYear, String resumeUrl, Department department) {
         super(id, username, password, email, pictureUrl, role, isActive);
         this.firstName = firstName;
         this.lastName = lastName;
@@ -30,7 +29,6 @@ public class Student extends User{
         this.graduationYear = graduationYear;
         this.resumeUrl = resumeUrl;
         this.department = department;
-        this.attendances = attendances;
     }
 
     @Column(name = "first_name")
@@ -57,8 +55,5 @@ public class Student extends User{
     @ManyToOne
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
-
-    @OneToMany(mappedBy = "student")
-    private Set<Attendance> attendances = new HashSet<>();
 
 }
