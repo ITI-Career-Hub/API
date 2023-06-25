@@ -12,7 +12,7 @@ import gov.iti.career.hub.persistence.entities.enums.InterviewType;
 public record GetAppointmentResponse(Integer id,String appointmentName, LocalDate appointmentDate,
                                      InterviewType interviewType, String[] interviewers, Integer roomId, String roomName,
                                      String interviewNotes, Integer departmentId, String departmentName,
-                                     Integer companyId,String companyName, Integer eventId,String eventName)
+                                     Integer companyId,String companyName, Integer eventId,String eventName, Boolean isApproved)
 implements Serializable {
     
 }
